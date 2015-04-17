@@ -1,0 +1,44 @@
+# Unix
+alias reload="exec $SHELL -l"
+alias tlf="tail -f"
+alias ln='ln -v'
+alias mkdir='mkdir -p'
+alias ...='../..'
+alias l='ls'
+alias ll='ls -al'
+alias lh='ls -Alh'
+alias -g G='| grep'
+alias -g M='| less'
+alias -g L='| wc -l'
+alias -g ONE="| awk '{ print \$1}'"
+alias e="$EDITOR"
+alias v="$VISUAL"
+
+# tree
+alias tree='tree -L 2'
+
+# git
+alias gst="git status"
+alias gci="git pull --rebase && rake && git push"
+alias ga="git add"
+alias gc="git commit"
+
+# Bundler
+alias b="bundle"
+alias be="bundle exec"
+
+# Tests and Specs
+# alias t="ruby -I test"
+alias cuc="bundle exec cucumber"
+
+# Rails
+alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
+alias m="migrate"
+alias rk="rake"
+alias s="rspec"
+alias z="zeus"
+
+alias rails404="cd ~/src/rails && vim ."
+
+# Include custom aliases
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local
