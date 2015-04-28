@@ -314,8 +314,13 @@ augroup vimrcEx
 
   autocmd! BufRead,BufNewFile *.sass setfiletype sass 
 
-  autocmd BufRead *.mkd  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:&gt;
+  " autocmd BufRead *.md  set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead *.markdown  set ai formatoptions=tcroqn2 comments=n:&gt;
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+
+  " Enable spellchecking for Markdown
+  autocmd FileType markdown setlocal spell
 
   " Indent p tags
   " autocmd FileType html,eruby if g:html_indent_tags !~ '\\|p\>' | let g:html_indent_tags .= '\|p\|li\|dt\|dd' | endif
@@ -327,9 +332,6 @@ augroup vimrcEx
   " to run commands there.
   autocmd! CmdwinEnter * :unmap <cr>
   autocmd! CmdwinLeave * :call MapCR()
-
-  " *.md is markdown
-  autocmd! BufNewFile,BufRead *.md setlocal ft=
 
   " indent slim two spaces, not four
   autocmd! FileType *.slim set sw=2 sts=2 et
@@ -356,6 +358,7 @@ set expandtab
 
 " Display extra whitespace
 " set list listchars=tab:▸\·,trail:·,eol:¬
+set list listchars=trail:·,eol:¬
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
