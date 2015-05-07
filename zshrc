@@ -7,7 +7,7 @@ export ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE=' <->'
 git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ -n $ref ]]; then
-    echo " %{$fg_bold[green]%}${ref#refs/heads/}$(parse_git_dirty)$(git_remote_status)%{$reset_color%}"
+    echo " %{$fg_bold[white]%}${ref#refs/heads/}$(parse_git_dirty)$(git_remote_status)%{$reset_color%}"
   fi
 }
 
