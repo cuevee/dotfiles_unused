@@ -1,5 +1,5 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " BASIC EDITING CONFIGURATION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 filetype plugin indent on
@@ -31,7 +31,7 @@ set autowrite     " Automatically :write before running commands
 set hls           " highlight and incremental search
 set clipboard=unnamed " use system clipboard
 set noeb vb t_vb= " disable bell
-set t_ti= t_te=
+" set t_ti t_te=  " make vim remain on screen when backgrounding/exiting
 set encoding=utf-8
 set switchbuf=useopen
 set scrolloff=10
@@ -47,7 +47,7 @@ set wildmode=list:longest
 set visualbell
 set cursorline
 set ttyfast
-" set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
+set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 set smartcase
@@ -277,7 +277,7 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 " Diff tab management: open the current git diff in a tab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " command! GdiffInTab tabedit %|vsplit|Gdiff
-" nnoremap <leader>d :GdiffInTab<cr>
+nnoremap <leader>d :GdiffInTab<cr>
 " nnoremap <leader>D :tabclose<cr>
 
 set textwidth=79
@@ -341,11 +341,12 @@ augroup END
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " :set t_Co=256 " 256 colors
-" :set background=light
+" :set background=dark
 " :color solarized
 
 " Color scheme
-colorscheme jellybeans
+colorscheme solarized
+:set background=light
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
@@ -358,7 +359,7 @@ set expandtab
 
 " Display extra whitespace
 " set list listchars=tab:▸\·,trail:·,eol:¬
-set list listchars=trail:·,eol:¬
+" set list listchars=trail:·,eol:¬
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -403,9 +404,6 @@ nnoremap <leader><leader> <c-^>
 
 nnoremap j gj
 nnoremap k gk
-
-" Run commands that require an interactive shell
-" nnoremap <Leader>r :RunInInteractiveShell<space>
 
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
@@ -466,3 +464,7 @@ endif
 " resize
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
+
+" UltiSnips
+let g:UltiSnipsEditSplit="vertical"
+

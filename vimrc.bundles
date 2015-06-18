@@ -32,6 +32,9 @@ Bundle 'freitass/todo.txt-vim'
 Bundle 'Keithbsmiley/swift.vim'
 Bundle 'ngmy/vim-rubocop.git'
 Bundle 'slim-template/vim-slim.git'
+" Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'rking/ag.vim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
