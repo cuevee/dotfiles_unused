@@ -133,8 +133,8 @@ export VIRTUALENV_DISTRIBUTE=true
 export GOPATH=$HOME/source/go
 
 # Android
-export JAVA_HOME=$(/usr/libexec/java_home)
-export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.0.2
+# export JAVA_HOME=$(/usr/libexec/java_home)
+# export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.0.2
 
 # Docker
 export DOCKER_HOST=tcp://192.168.59.103:2376
