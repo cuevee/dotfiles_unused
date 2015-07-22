@@ -35,6 +35,9 @@ Bundle 'slim-template/vim-slim.git'
 " Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 Plugin 'rking/ag.vim'
+Plugin 'elixir-lang/vim-elixir'
+Plugin 'benmills/vimux'
+Plugin 'pgr0ss/vimux-ruby-test'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
