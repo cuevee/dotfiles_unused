@@ -34,7 +34,7 @@ set noeb vb t_vb= " disable bell
 " set t_ti t_te=  " make vim remain on screen when backgrounding/exiting
 set encoding=utf-8
 set switchbuf=useopen
-set scrolloff=10
+set scrolloff=15
 set showtabline=2 " always show tab header line
 set winwidth=79
 set autoindent
@@ -47,7 +47,7 @@ set wildmode=list:longest
 set visualbell
 set cursorline
 set ttyfast
-set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
+" set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 set smartcase
@@ -276,7 +276,7 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Diff tab management: open the current git diff in a tab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" command! GdiffInTab tabedit %|vsplit|Gdiff
+command! GdiffInTab tabedit %|vsplit|Gdiff
 nnoremap <leader>d :GdiffInTab<cr>
 " nnoremap <leader>D :tabclose<cr>
 
@@ -287,9 +287,9 @@ set formatoptions=qrn1
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-" if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-syntax on
-" endif
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+  syntax on
+endif
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
