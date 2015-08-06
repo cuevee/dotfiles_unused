@@ -38,6 +38,8 @@ Plugin 'rking/ag.vim'
 Plugin 'elixir-lang/vim-elixir'
 Plugin 'benmills/vimux'
 Plugin 'pgr0ss/vimux-ruby-test'
+" Plugin 'vim-scripts/TaskList.vim'
+Plugin 'davidhalter/jedi-vim.git'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local

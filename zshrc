@@ -164,7 +164,8 @@ if which pyenv &>/dev/null; then eval "$(pyenv init - --no-rehash)"; fi
 export PATH="/Users/quintis/.pyenv/shims:$PATH"
 
 # load exenv if available
-if which exenv > /dev/null; then eval "$(exenv init -)"; fi
+# if which exenv > /dev/null; then eval "$(exenv init -)"; fi
+# source ~/.exenv/completions/exenv.zsh
 
 # load nodenv if available
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi

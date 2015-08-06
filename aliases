@@ -40,5 +40,9 @@ alias z="zeus"
 
 alias rails404="cd ~/src/rails && vim ."
 
+# tmux
+alias tls="tmux list-sessions"
+alias ta='tmux attach -t "$1"'
+
 # Include custom aliases
 [[ -f ~/.aliases.local ]] && source ~/.aliases.local
