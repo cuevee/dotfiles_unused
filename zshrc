@@ -59,8 +59,7 @@ fpath=(~/.zsh/completion $fpath)
 
 # completion
 setopt no_case_glob
-autoload -U compinit
-compinit -C
+autoload -Uz compinit && compinit -i
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
       'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
