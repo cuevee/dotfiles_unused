@@ -13,6 +13,12 @@ alias -g L='| wc -l'
 alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
+alias bab=babushka
+
+# Docker
+# dme="eval ""$(docker-machine env \$1)"""
+alias doco="docker-compose"
+alias doma="docker-machine"
 
 # tree
 alias tree='tree -L 2'
