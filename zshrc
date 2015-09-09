@@ -135,11 +135,6 @@ export GOPATH=$HOME/source/go
 # export JAVA_HOME=$(/usr/libexec/java_home)
 # export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.0.2
 
-# Docker
-export DOCKER_HOST=tcp://192.168.59.103:2376
-export DOCKER_CERT_PATH=/Users/quintis/.boot2docker/certs/boot2docker-vm
-export DOCKER_TLS_VERIFY=1
-
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
