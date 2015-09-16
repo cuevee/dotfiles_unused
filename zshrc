@@ -150,6 +150,9 @@ export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 # android
 export ANDROID_HOME="/usr/local/Cellar/android-sdk/23.0.2"
 
+# rust
+export RUST_SRC_PATH="$HOME/source/rust/src"
+
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh --no-rehash)"; fi
 
