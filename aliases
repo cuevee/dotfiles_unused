@@ -20,6 +20,9 @@ alias bab=babushka
 alias doco="docker-compose"
 alias doma="docker-machine"
 
+alias dr="docker run -rm"
+alias de="docker exec"
+
 # tree
 alias tree='tree -L 2'
 
