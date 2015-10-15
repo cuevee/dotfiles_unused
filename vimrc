@@ -293,9 +293,9 @@ set formatoptions=qrn1
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
-" if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
-" endif
+endif
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -351,17 +351,18 @@ set t_Co=256 " 256 colors
 " :color solarized
 
 " Color scheme
-colorscheme solarized
-:set background=light
+" colorscheme solarized
+" :set background=light
+colorscheme onedark
 " highlight NonText guibg=#060606
-" highlight Folded  guibg=#0A0A0A guifg=#9090D0
+highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
 " Softtabs, 2 spaces
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
-set shiftround
-set expandtab
+" set shiftround
+" set expandtab
 
 " Display extra whitespace
 " set list listchars=tab:▸\·,trail:·,eol:¬
