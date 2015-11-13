@@ -34,8 +34,8 @@ set noeb vb t_vb= " disable bell
 " set t_ti t_te=  " make vim remain on screen when backgrounding/exiting
 set encoding=utf-8
 set switchbuf=useopen
-set scrolloff=15
-set showtabline=2 " always show tab header line
+set scrolloff=10
+set showtabline=1 " always show tab header line
 set winwidth=79
 set autoindent
 " allow backspacing over everything in insert mode
@@ -75,7 +75,7 @@ let g:jedi#use_splits_not_buffers = "left"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+" :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
@@ -454,8 +454,8 @@ nnoremap <leader>v V`]                                     " reselect the text t
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>         " vedit ~/.vimrc
 
 " configure syntastic syntax checking to check on open as well as save
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
 
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
