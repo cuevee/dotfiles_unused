@@ -59,6 +59,9 @@ set hlsearch
 set modeline
 set modelines=3
 
+" Paste without all the vim smartness
+set pastetoggle=<F2>
+
 " If a file is changed outside of vim, automatically reload it without asking
 set autoread
 
@@ -69,6 +72,7 @@ set nojoinspaces
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " JEDI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" let g:jedi#completions_command = "<Ctrl-Space>"
 let g:jedi#use_splits_not_buffers = "left"
 
 
@@ -283,7 +287,7 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 " Diff tab management: open the current git diff in a tab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 command! GdiffInTab tabedit %|vsplit|Gdiff
-nnoremap <leader>d :GdiffInTab<cr>
+" nnoremap <leader>d :GdiffInTab<cr>
 " nnoremap <leader>D :tabclose<cr>
 
 set textwidth=79
