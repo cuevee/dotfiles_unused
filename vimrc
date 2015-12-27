@@ -31,10 +31,10 @@ set autowrite     " Automatically :write before running commands
 set hls           " highlight and incremental search
 set clipboard=unnamed " use system clipboard
 set noeb vb t_vb= " disable bell
-" set t_ti t_te=  " make vim remain on screen when backgrounding/exiting
+" set t_ti t_te= " make vim remain on screen when backgrounding/exiting
 set encoding=utf-8
 set switchbuf=useopen
-set scrolloff=10
+" set scrolloff=5
 set showtabline=1 " always show tab header line
 set winwidth=79
 set autoindent
@@ -47,7 +47,9 @@ set wildmode=list:longest
 set visualbell
 set cursorline
 set ttyfast
-" set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
+set number
+set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
+" set numberwidth=4
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 set smartcase
@@ -79,7 +81,7 @@ let g:jedi#use_splits_not_buffers = "left"
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " STATUS LINE
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" :set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MISC KEY MAPS
@@ -197,11 +199,12 @@ nnoremap <leader>. :call OpenTestAlternate()<cr>
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! MapCR()
-  nnoremap <cr> :call RunTestFile()<cr>
+  nnoremap <cr> :nohl<cr>
 endfunction
 call MapCR()
 nnoremap <leader>T :call RunNearestTest()<cr>
-nnoremap <leader>a :call RunTests('')<cr>
+" nnoremap <leader>a :call RunTests('')<cr>
+nnoremap <leader>a :!rake<cr>
 nnoremap <leader>c :w\|:!script/features<cr>
 nnoremap <leader>w :w\|:!script/features --profile wip<cr>
 
@@ -350,15 +353,14 @@ augroup END
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set t_Co=256 " 256 colors
+" set t_Co=256 " 256 colors
 " :set background=dark
 " :color solarized
 
 " Color scheme
 " colorscheme solarized
 " :set background=light
-colorscheme onedark
-" highlight NonText guibg=#060606
+colorscheme mustang
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
 " Softtabs, 2 spaces
@@ -385,8 +387,7 @@ if executable('ag')
 endif
 
 " Numbers
-set number
-set numberwidth=4
+" set numberwidth=4
 
 " Tab completion
 " will insert tab at beginning of line,
@@ -403,7 +404,9 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 " Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R .<CR>
+map <Leader>ct :!ctags -R %%<CR>
+
+map <Leader>r :so ~/.vimrc<cr>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -458,9 +461,9 @@ nnoremap <leader>v V`]                                     " reselect the text t
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>         " vedit ~/.vimrc
 
 " configure syntastic syntax checking to check on open as well as save
-" set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
-
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list = 1
