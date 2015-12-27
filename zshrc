@@ -1,3 +1,6 @@
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+
 # modify the prompt to contain git branch name if applicable
 export ZSH_THEME_GIT_PROMPT_DIRTY=' *'
 export ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE=' <-'
