@@ -103,20 +103,6 @@ imap <c-l> <space>=><space>
 imap <c-c> <esc>
 nnoremap <leader><leader> <c-^>
 
-" Close all other windows, open a vertical split, and open this file's test
-" alternate in it.
-nnoremap <leader>s :call FocusOnFile()<cr>
-function! FocusOnFile()
-  tabnew %
-  normal! v
-  normal! l
-  call OpenTestAlternate()
-  normal! h
-endfunction
-
-" Reload in chrome
-map <leader>l :w\|:silent !reload-chrome<cr>
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
