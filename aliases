@@ -14,9 +14,13 @@ alias -g ONE="| awk '{ print \$1}'"
 alias e="$EDITOR"
 alias v="$VISUAL"
 alias bab=babushka
+alias flushdns='dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed'
+
+# vim
+alias vimclean='vim -u NONE -N'
 
 # Docker
-# dme="eval ""$(docker-machine env \$1)"""
+# alias dme="eval ""$(docker-machine env \$1)"""
 alias doco="docker-compose"
 alias doma="docker-machine"
 
