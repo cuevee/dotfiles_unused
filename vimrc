@@ -36,6 +36,7 @@ set encoding=utf-8
 set switchbuf=useopen
 " set scrolloff=5
 set showtabline=1 " always show tab header line
+set linebreak 
 set winwidth=79
 set autoindent
 " allow backspacing over everything in insert mode
