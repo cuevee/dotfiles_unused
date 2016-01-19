@@ -191,7 +191,7 @@ endfunction
 call MapCR()
 nnoremap <leader>T :call RunNearestTest()<cr>
 " nnoremap <leader>a :call RunTests('')<cr>
-nnoremap <leader>a :!rake<cr>
+" nnoremap <leader>a :!rake<cr>
 nnoremap <leader>c :w\|:!script/features<cr>
 nnoremap <leader>w :w\|:!script/features --profile wip<cr>
 
@@ -348,7 +348,6 @@ augroup END
 " colorscheme solarized
 " :set background=light
 colorscheme mustang
-highlight Folded  guibg=#0A0A0A guifg=#9090D0
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -393,7 +392,7 @@ inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 " Index ctags from any project, including those outside Rails
 map <Leader>ct :!ctags -R %%<CR>
 
-map <Leader>r :so ~/.vimrc<cr>
+" map <Leader>re :so ~/.vimrc<cr>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -460,9 +459,10 @@ let g:syntastic_check_on_wq = 0
 
 let g:move_key_modifier='C'
 
-map <F5> :set nowrap! <CR>
-
 nmap <F2> ^y$:<C-R>"<CR>
+map <F5> :set nowrap!<CR>
+map <F6> :set spell!<CR>
+
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
