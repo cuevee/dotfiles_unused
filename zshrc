@@ -1,11 +1,21 @@
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+ulimit -n 10000
+
 # modify the prompt to contain git branch name if applicable
 export ZSH_THEME_GIT_PROMPT_DIRTY=' *'
 export ZSH_THEME_GIT_PROMPT_BEHIND_REMOTE=' <-'
 export ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE=' ->'
 export ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE=' <->'
+export ZSH_THEME_JOBS_INDICATOR='_'
+
+jobs_prompt_info() {
+	result=false
+	if [ `jobs | wc -l | tr -d ' '` == 1 ]; then
+		echo " $ZSH_THEME_JOBS_INDICATOR"
+	fi
+}
 
 git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
@@ -55,7 +65,7 @@ git_remote_status() {
 }
 
 setopt promptsubst
-export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info) %# '
+export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
 
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
