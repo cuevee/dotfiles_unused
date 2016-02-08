@@ -345,7 +345,7 @@ augroup END
 " :color solarized
 
 " Color scheme
-" colorscheme solarized
+"  colorscheme solarized
 " :set background=light
 colorscheme mustang
 
@@ -493,6 +493,8 @@ vnoremap <Space> za
 if exists(":Tabularize")
 	nmap <Leader>a= :Tabularize /=<CR>
 	vmap <Leader>a= :Tabularize /=<CR>
+	nmap <Leader>a, :Tabularize /,<CR>
+	vmap <Leader>a, :Tabularize /,<CR>
 	nmap <Leader>a: :Tabularize /:\zs<CR>
 	vmap <Leader>a: :Tabularize /:\zs<CR>
 	nmap <Leader>a\| :Tabularize /\|<CR>
@@ -511,3 +513,13 @@ function! s:align()
     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
   endif
 endfunction
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
+
