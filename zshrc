@@ -13,7 +13,7 @@ export ZSH_THEME_JOBS_INDICATOR='_'
 jobs_prompt_info() {
 	result=false
 	if [ `jobs | wc -l | tr -d ' '` == 1 ]; then
-		echo " $ZSH_THEME_JOBS_INDICATOR"
+		echo " %{$fg_bold[red]%}$ZSH_THEME_JOBS_INDICATOR%{$reset_color%}"
 	fi
 }
 
