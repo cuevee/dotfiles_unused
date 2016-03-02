@@ -345,9 +345,9 @@ augroup END
 " :color solarized
 
 " Color scheme
-"  colorscheme solarized
-" :set background=light
-colorscheme mustang
+colorscheme solarized
+set background=dark
+" colorscheme mustang
 
 " Softtabs, 2 spaces
 set tabstop=2
@@ -515,7 +515,7 @@ function! s:align()
 endfunction
 
 " Show syntax highlighting groups for word under cursor
-nmap <C-S-P> :call <SID>SynStack()<CR>
+nmap <Leader>p :call <SID>SynStack()<CR>
 function! <SID>SynStack()
   if !exists("*synstack")
     return
@@ -523,3 +523,4 @@ function! <SID>SynStack()
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+let g:ycm_path_to_python_interpreter = "/Users/quintis/.pyenv/shims/python"
