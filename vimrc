@@ -345,9 +345,9 @@ augroup END
 " :color solarized
 
 " Color scheme
-colorscheme solarized
+" colorscheme solarized
 set background=dark
-" colorscheme mustang
+colorscheme mustang
 
 " Softtabs, 2 spaces
 set tabstop=2
