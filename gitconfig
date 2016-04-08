@@ -78,6 +78,7 @@
   prune = true
 [user]
 	name = Quintis Venter
+	email = quintis@quint.is
 [rerere]
 	enabled = true
 [difftool "sourcetree"]
