@@ -13,8 +13,6 @@ let mapleader = ","
 nnoremap / /\v
 vnoremap / /\v
 
-set runtimepath+=/Users/quintis/.vim/custom/mpc
-
 set backspace=2   " Backspace deletes like most programs in insert mode
 " Don't make backups at all
 set nobackup
