@@ -3,20 +3,21 @@ if &compatible
 end
 
 filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
 
 " Let Vundle manage Vundle
-Bundle 'vundlevim/vundle'
+Plugin 'VundleVim/Vundle.vim'
 
 " Define bundles via Github repos
-Bundle 'danro/rename.vim'
-Bundle 'kien/ctrlp.vim'
-Bundle 'scrooloose/syntastic'
-Bundle 'tpope/vim-surround'
-Bundle 'vim-scripts/ctags.vim'
-Bundle 'vim-scripts/tComment'
-Bundle 'tpope/vim-repeat'
+Plugin 'danro/rename.vim'
+Plugin 'kien/ctrlp.vim'
+Plugin 'scrooloose/syntastic'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'vim-scripts/ctags.vim'
+Plugin 'vim-scripts/tComment'
+Plugin 'tpope/vim-repeat'
 Plugin 'rking/ag.vim'
 Plugin 'elixir-lang/vim-elixir'
 " Plugin 'davidhalter/jedi-vim.git'
@@ -28,7 +29,7 @@ Plugin 'honza/vim-snippets'
 " Plugin 'Valloric/YouCompleteMe'
 Plugin 'nelstrom/vim-markdown-folding'
 Plugin 'godlygeek/tabular'
-Bundle 'tpope/vim-markdown'
+Plugin 'tpope/vim-markdown'
 " Plugin 'kana/vim-textobj-entire'
 " Plugin 'SirVer/ultisnips'
 " Plugin 'dhruvasagar/vim-table-mode'
@@ -38,4 +39,5 @@ if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
 endif
 
-filetype on
+call vundle#end()
+filetype plugin indent on
