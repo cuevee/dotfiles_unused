@@ -6,7 +6,7 @@ AwesomePrint.pry!
 
 # Pry.config.prompt = Pry::NAV_PROMPT
 
-Pry.config.hooks.add_hook(:after_session, :say_bye) { puts "bye-bye, and keep hacking!" }
+Pry.config.hooks.add_hook(:after_session, :say_bye) { puts "Adios! Keep hacking!" }
 
 class Array
   def self.toy(n=10, &block)
