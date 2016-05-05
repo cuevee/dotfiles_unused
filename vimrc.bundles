@@ -19,8 +19,8 @@ Bundle 'vim-scripts/tComment'
 Bundle 'tpope/vim-repeat'
 Plugin 'rking/ag.vim'
 Plugin 'elixir-lang/vim-elixir'
-Plugin 'davidhalter/jedi-vim.git'
-" Plugin 'tpope/vim-rails'
+" Plugin 'davidhalter/jedi-vim.git'
+Plugin 'tpope/vim-rails'
 Plugin 'tpope/vim-endwise'
 Plugin 'vim-ruby/vim-ruby'
 Plugin 'honza/vim-snippets'
@@ -32,6 +32,7 @@ Bundle 'tpope/vim-markdown'
 " Plugin 'kana/vim-textobj-entire'
 " Plugin 'SirVer/ultisnips'
 " Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'alvan/vim-closetag'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
