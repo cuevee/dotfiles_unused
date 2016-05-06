@@ -187,9 +187,6 @@ function! MapCR()
   nnoremap <cr> :nohl<cr>
 endfunction
 call MapCR()
-nnoremap <leader>T :call RunNearestTest()<cr>
-" nnoremap <leader>a :call RunTests('')<cr>
-" nnoremap <leader>a :!rake<cr>
 nnoremap <leader>c :w\|:!script/features<cr>
 nnoremap <leader>w :w\|:!script/features --profile wip<cr>
 
@@ -208,50 +205,6 @@ function! RunTestFile(...)
         return
     end
     call RunTests(t:grb_test_file . command_suffix)
-endfunction
-
-function! RunNearestTest()
-    let spec_line_number = line('.')
-    call RunTestFile(":" . spec_line_number)
-endfunction
-
-function! SetTestFile(command_suffix)
-    " Set the spec file that tests will be run for.
-    let t:grb_test_file=@% . a:command_suffix
-endfunction
-
-function! RunTests(filename)
-    " Write the file and run tests for the given filename
-    if expand("%") != ""
-      :w
-    end
-    if match(a:filename, '\.feature$') != -1
-        exec ":!script/features " . a:filename
-    else
-        " First choice: project-specific test script
-        if filereadable("script/test")
-            exec ":!script/test " . a:filename
-        " Fall back to the .test-commands pipe if available, assuming someone
-        " is reading the other side and running the commands
-        elseif filewritable(".test-commands")
-          let cmd = 'rspec --color --format progress --require "~/lib/vim_rspec_formatter" --format VimFormatter --out tmp/quickfix'
-          exec ":!echo " . cmd . " " . a:filename . " > .test-commands"
-
-          " Write an empty string to block until the command completes
-          sleep 100m " milliseconds
-          :!echo > .test-commands
-          redraw!
-        " Fall back to a blocking test run with Bundler
-        elseif filereadable("Gemfile")
-            exec ":!bundle exec rspec --color " . a:filename
-        " If we see python-looking tests, assume they should be run with Nose
-        elseif strlen(glob("test/**/*.py") . glob("tests/**/*.py"))
-            exec "!nosetests " . a:filename
-        " Fall back to a normal blocking test run
-        else
-            exec ":!rspec --color " . a:filename
-        end
-    end
 endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -274,10 +227,6 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Diff tab management: open the current git diff in a tab
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-command! GdiffInTab tabedit %|vsplit|Gdiff
-" nnoremap <leader>d :GdiffInTab<cr>
-" nnoremap <leader>D :tabclose<cr>
-
 set textwidth=79
 set formatoptions=qrn1
 
@@ -447,8 +396,8 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>         " vedit ~/.vimrc
 " configure syntastic syntax checking to check on open as well as save
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
-" set statusline+=%*
 
+" set statusline+=%*
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 let g:syntastic_always_populate_loc_list = 0
 let g:syntastic_auto_loc_list = 0
@@ -528,3 +477,10 @@ let g:closetag_filenames = "*.erb,*.html,*.xhtml,*.phtml,*.eex"
 
 " autoremove traililng spaces
 autocmd BufWritePre *.py :%s/\s\+$//e
+
+nmap <silent> <leader>t :TestNearest<CR>
+nmap <silent> <leader>T :TestFile<CR>
+nmap <silent> <leader>a :TestSuite<CR>
+nmap <silent> <leader>l :TestLast<CR>
+nmap <silent> <leader>g :TestVisit<CR>
+

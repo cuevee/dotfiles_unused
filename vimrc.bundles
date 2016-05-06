@@ -34,6 +34,7 @@ Plugin 'tpope/vim-markdown'
 " Plugin 'SirVer/ultisnips'
 " Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'alvan/vim-closetag'
+Plugin 'janko-m/vim-test'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
