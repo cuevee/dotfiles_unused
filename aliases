@@ -24,6 +24,7 @@ alias vimclean='vim -u NONE -N'
 alias doco="docker-compose"
 alias doma="docker-machine"
 alias dls="docker-machine ls"
+alias donuke="docker ps -aq --filter status=exited | xargs docker rm"
 
 alias dr="docker run -rm"
 alias de="docker exec"
