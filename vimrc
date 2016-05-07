@@ -484,3 +484,6 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+" CoVim
+" let CoVim_default_name = "Quintis"
+" let CoVim_default_port = "25001"

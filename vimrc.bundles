@@ -35,6 +35,7 @@ Plugin 'tpope/vim-markdown'
 " Plugin 'dhruvasagar/vim-table-mode'
 Plugin 'alvan/vim-closetag'
 Plugin 'janko-m/vim-test'
+" Plugin 'FredKSchott/CoVim'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
