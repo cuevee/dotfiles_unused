@@ -10,6 +10,17 @@ export ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE=' ->'
 export ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE=' <->'
 export ZSH_THEME_JOBS_INDICATOR='_'
 
+function basher() {
+	if [[ $1 = 'run' ]]
+	then
+		shift
+		/usr/local/bin/docker run -e HIST_FILE=/root/.bash_history -v $HOME/.zhistory:/root/.bash_history "$@"
+	else
+		/usr/local/bin/docker "$@"
+	fi
+}
+alias docker=basher
+
 jobs_prompt_info() {
 	result=false
 	if [ `jobs | wc -l | tr -d ' '` == 1 ]; then
