@@ -1,5 +1,5 @@
-export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
 
 ulimit -n 10000
 
@@ -19,7 +19,7 @@ function basher() {
 		/usr/local/bin/docker "$@"
 	fi
 }
-alias docker=basher
+# alias docker=basher
 
 jobs_prompt_info() {
 	result=false
