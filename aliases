@@ -22,9 +22,10 @@ alias vimclean='vim -u NONE -N'
 # Docker
 # alias dme="eval ""$(docker-machine env \$1)"""
 alias doco="docker-compose"
-# alias doma="docker-machine"
-# alias dls="docker-machine ls"
-alias donuke="docker ps -aq --filter status=exited | xargs docker rm -v"
+alias doma="docker-machine"
+alias dls="docker-machine ls"
+alias doclean="docker ps -aq --filter status=exited | xargs docker rm -v"
+alias donuke="docker ps -aq | xargs docker rm -vf"
 
 # tree
 alias tree='tree -L 2'
