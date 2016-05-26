@@ -10,21 +10,18 @@ export ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE=' ->'
 export ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE=' <->'
 export ZSH_THEME_JOBS_INDICATOR='_'
 
-function basher() {
-	if [[ $1 = 'run' ]]
-	then
-		shift
-		/usr/local/bin/docker run -e HIST_FILE=/root/.bash_history -v $HOME/.zhistory:/root/.bash_history "$@"
-	else
-		/usr/local/bin/docker "$@"
-	fi
+check_last_exit_code() {
+	if [[ $? -ne 0 ]]; then
+    local EXIT_CODE_PROMPT=' '
+    EXIT_CODE_PROMPT+="%{$fg[red]%}$?%{$reset_color%}"
+    echo "$EXIT_CODE_PROMPT"
+  fi
 }
-# alias docker=basher
 
 jobs_prompt_info() {
-	result=false
-	if [ `jobs | wc -l | tr -d ' '` == 1 ]; then
-		echo " %{$fg_bold[red]%}$ZSH_THEME_JOBS_INDICATOR%{$reset_color%}"
+	if [ `jobs | wc -l | tr -d ' '` = 1 ]; then
+		local PROG_NAME=`jobs | awk '{print $4}'`
+		echo " %{$fg_bold[red]%}$PROG_NAME%{$reset_color%}"
 	fi
 }
 
@@ -77,6 +74,7 @@ git_remote_status() {
 
 setopt promptsubst
 export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
+export RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
