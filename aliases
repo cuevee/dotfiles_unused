@@ -27,6 +27,10 @@ alias dls="docker-machine ls"
 alias doclean="docker ps -aq --filter status=exited | xargs docker rm -v"
 alias donuke="docker ps -aq | xargs docker rm -vf"
 
+# ansible
+alias an=ansible
+alias ap=ansible-playbook
+
 # tree
 alias tree='tree -L 2'
 
@@ -43,14 +47,6 @@ alias be="bundle exec"
 # Tests and Specs
 # alias t="ruby -I test"
 alias cuc="bundle exec cucumber"
-
-# Rails
-alias migrate="rake db:migrate db:rollback && rake db:migrate db:test:prepare"
-alias m="migrate"
-alias rk="rake"
-alias s="rspec"
-
-alias rails404="cd ~/src/rails && vim ."
 
 # tmux
 alias tls="tmux list-sessions"
