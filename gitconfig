@@ -99,3 +99,5 @@
 	postBuffer = 157286400
 [credential]
 	helper = osxkeychain
+[init]
+	templatedir = /Users/quintis/.git-templates
