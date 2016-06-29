@@ -28,8 +28,8 @@ jobs_prompt_info() {
 git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ -n $ref ]]; then
-    echo " %{$fg_bold[green]%}${ref#refs/heads/}$(parse_git_dirty)$(git_remote_status)%{$reset_color%}"
-  fi
+		echo " %{$fg_bold[green]%}${ref#refs/heads/}$(parse_git_dirty)$(git_remote_status)%{$reset_color%}"
+	fi
 }
 
 parse_git_dirty() {
@@ -79,6 +79,7 @@ export RPROMPT='$(check_last_exit_code)'
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
 fpath=(/usr/local/share/zsh-completions $fpath)
+fpath=(/usr/local/share/zsh/site-functions $fpath)
 
 # completion
 setopt no_case_glob
@@ -204,6 +205,5 @@ export PATH=".git/safe/../../bin:$PATH"
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
-# z
-[[ -f `brew --prefix`/etc/profile.d/z.sh ]] && source `brew --prefix`/etc/profile.d/z.sh
-
+# autojump
+[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
