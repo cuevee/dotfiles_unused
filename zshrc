@@ -10,18 +10,20 @@ export ZSH_THEME_GIT_PROMPT_AHEAD_REMOTE=' ->'
 export ZSH_THEME_GIT_PROMPT_DIVERGED_REMOTE=' <->'
 export ZSH_THEME_JOBS_INDICATOR='_'
 
-check_last_exit_code() {
-	if [[ $? -ne 0 ]]; then
+function check_last_exit_code() {
+  local LAST_EXIT_CODE=$?
+  if [[ $LAST_EXIT_CODE -ne 0 ]]; then
     local EXIT_CODE_PROMPT=' '
-    EXIT_CODE_PROMPT+="%{$fg[red]%}$?%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
     echo "$EXIT_CODE_PROMPT"
   fi
 }
 
 jobs_prompt_info() {
-	if [ `jobs | wc -l | tr -d ' '` = 1 ]; then
-		local PROG_NAME=`jobs | awk '{print $4}'`
-		echo " %{$fg_bold[red]%}$PROG_NAME%{$reset_color%}"
+	if [[ `jobs | wc -l` -ne 0 ]]; then
+		echo " %{$fg_bold[red]%}$(jobs | tr -d \"+\-\" | tr -s ' ' | awk '{print $3}' | xargs)%{$reset_color%}"
 	fi
 }
 
@@ -74,7 +76,7 @@ git_remote_status() {
 
 setopt promptsubst
 export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
-export RPROMPT='$(check_last_exit_code)'
+RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
 fpath=(~/.zsh/completion $fpath)
