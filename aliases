@@ -33,7 +33,7 @@ alias an=ansible
 alias ap=ansible-playbook
 
 # tree
-alias tree='tree -L 2'
+alias tree='tree -a -L 2'
 
 # git
 alias gst="git status"
