@@ -75,7 +75,7 @@ git_remote_status() {
 }
 
 setopt promptsubst
-export PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
+PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
@@ -117,19 +117,14 @@ setopt extendedglob
 # Allow [ or ] whereever you want
 unsetopt nomatch
 
-# vi mode
-# bindkey -v
-# bindkey "^F" vi-cmd-mode
-# bindkey jj vi-cmd-mode
-
 # handy keybindings
 # bindkey "^A" beginning-of-line
 # bindkey "^E" end-of-line
 bindkey "^R" history-incremental-search-backward
+bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # bindkey "^P" history-search-backward
 # bindkey "^Y" accept-and-hold
 # bindkey "^N" insert-last-word
-# bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # use vim as the visual editor
 export VISUAL=vim
@@ -157,27 +152,16 @@ export VIRTUALENV_DISTRIBUTE=true
 # GoLang
 export GOPATH=$HOME/source/go
 
-# Android
-# export JAVA_HOME=$(/usr/libexec/java_home)
-# export ANDROID_HOME=/usr/local/Cellar/android-sdk/24.0.2
-
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
 
-export PATH="$HOME/bin:/usr/local/heroku/bin:/usr/local/bin:/usr/local/sbin:$PATH"
-export PATH=$PATH:/usr/local/share/npm/bin
+export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH=$PATH:$GOPATH/bin
 
 export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
-
-# android
-export ANDROID_HOME="/usr/local/Cellar/android-sdk/23.0.2"
-
-# rust
-export RUST_SRC_PATH="$HOME/source/rust/src"
 
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh --no-rehash)"; fi
@@ -188,15 +172,10 @@ export PATH="/Users/quintis/.pyenv/shims:$PATH"
 
 # load exenv if available
 if which exenv > /dev/null; then eval "$(exenv init -)"; fi
-# source ~/.exenv/completions/exenv.zsh
 
 # load nodenv if available
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
-export PATH="$HOME/.nodenv/bin:$PATH"
 export PATH="$HOME/.nodenv/shims:$PATH"
-
-# load thoughtbot/dotfiles scripts
-export PATH="$HOME/.bin:$PATH"
 
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
