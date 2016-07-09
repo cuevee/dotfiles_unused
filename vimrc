@@ -293,8 +293,11 @@ augroup END
 
 " Color scheme
 " colorscheme solarized
+
 set background=dark
-colorscheme mustang
+let g:hybrid_custom_term_colors = 1
+let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
+colorscheme hybrid
 
 " Softtabs, 2 spaces
 set tabstop=2
