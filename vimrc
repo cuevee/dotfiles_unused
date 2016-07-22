@@ -302,7 +302,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 " set shiftround
-" set expandtab
+set expandtab
 
 " Display extra whitespace
 " set list listchars=tab:▸\·,trail:·,eol:¬
