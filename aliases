@@ -11,9 +11,6 @@ alias -g G='| grep'
 alias -g M='| less'
 alias -g L='| wc -l'
 alias -g ONE="| awk '{ print \$1}'"
-alias e="$EDITOR"
-alias v="$VISUAL"
-alias bab=babushka
 alias flushdns='dscacheutil -flushcache;sudo killall -HUP mDNSResponder;say flushed'
 
 # vim
