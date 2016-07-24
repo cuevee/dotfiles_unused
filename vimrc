@@ -487,3 +487,11 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " CtrlP
 let g:ctrlp_show_hidden = 1
+
+" Tagbar
+nnoremap <silent> <F8> :TagbarToggle<CR>
+" let g:tagbar_autofocus = 1
+let g:tagbar_show_linenumbers = 0
+" let g:tagbar_autoshowtag = 1
+
+

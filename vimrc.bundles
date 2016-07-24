@@ -41,6 +41,7 @@ Plugin 'janko-m/vim-test'
 
 " Evaluating
 Plugin 'kylef/apiblueprint.vim'
+Plugin 'majutsushi/tagbar'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
