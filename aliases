@@ -22,9 +22,6 @@ alias doco="docker-compose"
 alias doma="docker-machine"
 alias docl="docker-cloud"
 alias dls="docker-machine ls"
-alias doclean="docker ps -aq --filter status=exited | xargs docker rm -v"
-alias nukec="docker ps -a | grep -v 'wip-' | awk 'NR>1 {print $1}' | xargs docker rm -vf"
-alias nukei="docker images | grep none | awk '{print $3}' | xargs docker rmi -f"
 
 # ansible
 alias an=ansible
