@@ -143,8 +143,6 @@ export VIRTUALENV_ARGS='--no-site-packages'
 ## pip with virtualenv
 export PIP_REQUIRE_VIRTUALENV=false    # only run when virtualenv active
 export PIP_RESPECT_VIRTUALENV=true     # automatically use active virtualenv
-export PYENV_VIRTUALENV_CACHE_PATH=$HOME/Library/Caches/pyenv-virtualenv
-export PIP_DOWNLOAD_CACHE=$HOME/Library/Caches/pip
 
 ## use distribute instead of setuptools
 export VIRTUALENV_DISTRIBUTE=true
@@ -168,7 +166,6 @@ if which rbenv &>/dev/null; then eval "$(rbenv init - zsh --no-rehash)"; fi
 
 # load pyenv if available
 if which pyenv &>/dev/null; then eval "$(pyenv init - --no-rehash)"; fi
-export PATH="/Users/quintis/.pyenv/shims:$PATH"
 
 # load exenv if available
 if which exenv > /dev/null; then eval "$(exenv init -)"; fi
