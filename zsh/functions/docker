@@ -1,0 +1,11 @@
+nukec() {
+  docker ps -a | grep -v 'wip-' | awk 'NR>1 {print $1}' | xargs docker rm -vf
+}
+
+nukei() {
+  docker images | grep none | awk '{print $3}' | xargs docker rmi -f
+}
+
+doclean() {
+  docker ps -aq --filter status=exited | xargs docker rm -v
+}
