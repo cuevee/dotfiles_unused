@@ -35,6 +35,7 @@ alias gst="git status"
 alias gci="git pull --rebase && rake && git push"
 alias ga="git add"
 alias gc="git commit"
+alias gcs="git-crypt status"
 
 # Bundler
 alias b="bundle"
