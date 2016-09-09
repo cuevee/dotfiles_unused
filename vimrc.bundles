@@ -39,9 +39,8 @@ Plugin 'alvan/vim-closetag'
 Plugin 'janko-m/vim-test'
 " Plugin 'FredKSchott/CoVim'
 
-" Evaluating
-Plugin 'kylef/apiblueprint.vim'
-Plugin 'majutsushi/tagbar'
+" Evaluate
+Plugin 'kchmck/vim-coffee-script'
 
 if filereadable(expand("~/.vimrc.bundles.local"))
   source ~/.vimrc.bundles.local
