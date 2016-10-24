@@ -64,9 +64,9 @@
 [branch]
   autosetupmerge = true
 [core]
-	excludesfile = /Users/quintis/.gitignore
+  excludesfile = /Users/quintis/.gitignore
   autocrlf = input
-	editor = vim
+  editor = vim
 [merge]
   ff = only
   tool = opendiff
@@ -77,27 +77,27 @@
 [fetch]
   prune = true
 [user]
-	name = Quintis Venter
-	email = quintis@quint.is
+  name = Quintis Venter
+  email = quintis@quint.is
 [rerere]
-	enabled = true
+  enabled = true
 [diff]
-	tool=opendiff
+  tool=opendiff
 [difftool]
-	    prompt = false
+      prompt = false
 [difftool "opendiff"]
-	cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
-	path = 
-	# cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
+  path =
+  # cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 [mergetool "opendiff"]
-	cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
-	path =
+  cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
+  path =
 # [mergetool "sourcetree"]
-# 	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-# 	trustExitCode = true
+#   cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+#   trustExitCode = true
 [http]
-	postBuffer = 157286400
+  postBuffer = 157286400
 [credential]
-	helper = osxkeychain
-[init]
-	templatedir = /Users/quintis/.git-templates
+  helper = osxkeychain
+# [init]
+#   templatedir = /Users/quintis/.git-templates
