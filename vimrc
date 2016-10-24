@@ -305,8 +305,8 @@ set shiftwidth=2
 set expandtab
 
 " Display extra whitespace
-set list listchars=tab:▸\·,trail:·,eol:¬
-set list listchars=trail:·,eol:¬
+" set list listchars=tab:▸\·,trail:·,eol:¬
+" set list listchars=trail:·,eol:¬
 
 " Use The Silver Searcher https://github.com/ggreer/the_silver_searcher
 if executable('ag')
@@ -338,7 +338,7 @@ endfunction
 inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
 
 " Index ctags from any project, including those outside Rails
-map <Leader>ct :!ctags -R %%<CR>
+map <leader>ct :!ctags -R %%<CR>
 
 " map <Leader>re :so ~/.vimrc<cr>
 
