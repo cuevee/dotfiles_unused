@@ -79,6 +79,9 @@
 [user]
   name = Quintis Venter
   email = quintis@quint.is
+	name = Quintis Venter
+	email = quintis@quint.is
+	signingkey = DCC2E34E32F1E66D
 [rerere]
   enabled = true
 [diff]
@@ -99,5 +102,3 @@
   postBuffer = 157286400
 [credential]
   helper = osxkeychain
-# [init]
-#   templatedir = /Users/quintis/.git-templates
