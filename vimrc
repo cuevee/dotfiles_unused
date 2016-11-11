@@ -13,6 +13,7 @@ let mapleader = ","
 nnoremap / /\v
 vnoremap / /\v
 
+set breakindent   " wrap lines without changing the amount of indent
 set backspace=2   " Backspace deletes like most programs in insert mode
 " Don't make backups at all
 set nobackup
@@ -493,5 +494,3 @@ nnoremap <silent> <F8> :TagbarToggle<CR>
 " let g:tagbar_autofocus = 1
 let g:tagbar_show_linenumbers = 0
 " let g:tagbar_autoshowtag = 1
-
-
