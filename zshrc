@@ -177,6 +177,8 @@ export PATH="$HOME/.nodenv/shims:$PATH"
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
 
+export PATH="/usr/local/bin:$PATH"
+
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
 
