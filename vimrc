@@ -388,7 +388,7 @@ inoremap <left> <nop>
 inoremap <right> <nop>
 
 nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>           " strip eof whitespace
-nnoremap <leader>ft Vatzf                                  " fold tags
+" nnoremap <leader>ft Vatzf                                  " fold tags
 nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR> " sort CSS props
 nnoremap <leader>q gqip                                    " hard rewrap parahraph
 
@@ -434,6 +434,7 @@ let g:go_fmt_command = "goimports"
 
 " folding
 set foldlevelstart=0
+set foldcolumn=2
 
 nnoremap <Space> za
 vnoremap <Space> za
