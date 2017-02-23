@@ -22,6 +22,8 @@ alias doco="docker-compose"
 alias doma="docker-machine"
 alias docl="docker-cloud"
 alias dls="docker-machine ls"
+alias de="docker exec"
+alias dce="docker-compose exec"
 
 # ansible
 alias an=ansible
