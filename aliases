@@ -28,6 +28,7 @@ alias dce="docker-compose exec"
 # ansible
 alias an=ansible
 alias ap=ansible-playbook
+alias av=ansible-vault
 
 # tree
 alias tree='tree -L 2'
