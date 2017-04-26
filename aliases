@@ -41,7 +41,6 @@ alias gc="git commit"
 alias gcs="git-crypt status"
 
 # Bundler
-alias b="bundle"
 alias be="bundle exec"
 
 # Tests and Specs
