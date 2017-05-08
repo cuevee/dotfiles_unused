@@ -21,6 +21,10 @@ function check_last_exit_code() {
   fi
 }
 
+function ruby_version() {
+  echo "[$(rbenv version | awk '{print $1}')] "
+}
+
 jobs_prompt_info() {
 	if [[ `jobs | wc -l` -ne 0 ]]; then
 		echo " %{$fg_bold[red]%}$(jobs | tr -d \"+\-\" | tr -s ' ' | awk '{print $3}' | xargs)%{$reset_color%}"
@@ -75,7 +79,7 @@ git_remote_status() {
 }
 
 setopt promptsubst
-PS1='${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
+PS1='%{$fg[white]%}$(ruby_version)%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
