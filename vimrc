@@ -2,10 +2,10 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Vim settings, rather then Vi settings. This setting must be as early as
-filetype plugin indent on
-
 " possible, as it has side effects.
 set nocompatible
+filetype plugin indent on
+set omnifunc=syntaxcomplete#Complete
 
 " Leader
 let mapleader = ","
@@ -13,10 +13,11 @@ let mapleader = ","
 nnoremap / /\v
 vnoremap / /\v
 
+set dictionary=/usr/share/dict/words
+
 set breakindent   " wrap lines without changing the amount of indent
 set backspace=2   " Backspace deletes like most programs in insert mode
-" Don't make backups at all
-set nobackup
+set nobackup			" don't make backups at all
 set nowritebackup
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
@@ -49,7 +50,7 @@ set cursorline
 set ttyfast
 set number
 set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
-" set numberwidth=4
+set numberwidth=4
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
 set smartcase
@@ -78,7 +79,7 @@ set nowrap
 " JEDI
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:jedi#completions_command = "<Ctrl-Space>"
-let g:jedi#use_splits_not_buffers = "left"
+" let g:jedi#use_splits_not_buffers = "left"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -90,16 +91,13 @@ set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 " MISC KEY MAPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " <Ctrl-l> redraws the screen and removes any search highlighting.
-nnoremap <silent> <C-l> :nohl<CR><C-l>
+" nnoremap <silent> <C-l> :nohl<CR><C-l>
 
 " Move around splits with <c-hjkl>
 nnoremap <c-j> <c-w>j
 nnoremap <c-k> <c-w>k
 nnoremap <c-h> <c-w>h
 nnoremap <c-l> <c-w>l
-
-" Insert a hash rocket with <c-l>
-imap <c-l> <space>=><space>
 
 " Can't be bothered to understand ESC vs <c-c> in insert mode
 imap <c-c> <esc>
@@ -109,16 +107,16 @@ nnoremap <leader><leader> <c-^>
 " MULTIPURPOSE TAB KEY
 " Indent if we're at the beginning of a line. Else, do completion.
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <expr> <tab> InsertTabWrapper()
-inoremap <s-tab> <c-n>
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <expr> <tab> InsertTabWrapper()
+" inoremap <s-tab> <c-n>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " OPEN FILES IN DIRECTORY OF CURRENT FILE
@@ -141,75 +139,59 @@ function! RenameFile()
 endfunction
 map <leader>n :call RenameFile()<cr>
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROMOTE VARIABLE TO RSPEC LET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1) { \2 }/
-  :normal ==
-endfunction
-:command! PromoteToLet :call PromoteToLet()
-:map <leader>p :PromoteToLet<cr>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " SWITCH BETWEEN TEST AND PRODUCTION CODE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! OpenTestAlternate()
-  let new_file = AlternateForCurrentFile()
-  exec ':e ' . new_file
-endfunction
-function! AlternateForCurrentFile()
-  let current_file = expand("%")
-  let new_file = current_file
-  let in_spec = match(current_file, '^spec/') != -1
-  let going_to_spec = !in_spec
-  let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
-  if going_to_spec
-    if in_app
-      let new_file = substitute(new_file, '^app/', '', '')
-    end
-    let new_file = substitute(new_file, '\.e\?rb$', '_spec.rb', '')
-    let new_file = 'spec/' . new_file
-  else
-    let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
-    let new_file = substitute(new_file, '^spec/', '', '')
-    if in_app
-      let new_file = 'app/' . new_file
-    end
-  endif
-  return new_file
-endfunction
-nnoremap <leader>. :call OpenTestAlternate()<cr>
+" """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" function! OpenTestAlternate()
+"   let new_file = AlternateForCurrentFile()
+"   exec ':e ' . new_file
+" endfunction
+" function! AlternateForCurrentFile()
+"   let current_file = expand("%")
+"   let new_file = current_file
+"   let in_spec = match(current_file, '^spec/') != -1
+"   let going_to_spec = !in_spec
+"   let in_app = match(current_file, '\<controllers\>') != -1 || match(current_file, '\<models\>') != -1 || match(current_file, '\<views\>') != -1 || match(current_file, '\<helpers\>') != -1
+"   if going_to_spec
+"     if in_app
+"       let new_file = substitute(new_file, '^app/', '', '')
+"     end
+"     let new_file = substitute(new_file, '\.e\?rb$', '_spec.rb', '')
+"     let new_file = 'spec/' . new_file
+"   else
+"     let new_file = substitute(new_file, '_spec\.rb$', '.rb', '')
+"     let new_file = substitute(new_file, '^spec/', '', '')
+"     if in_app
+"       let new_file = 'app/' . new_file
+"     end
+"   endif
+"   return new_file
+" endfunction
+" nnoremap <leader>. :call OpenTestAlternate()<cr>
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RUNNING TESTS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! MapCR()
-  nnoremap <cr> :nohl<cr>
-endfunction
-call MapCR()
-nnoremap <leader>c :w\|:!script/features<cr>
-nnoremap <leader>w :w\|:!script/features --profile wip<cr>
 
-function! RunTestFile(...)
-    if a:0
-        let command_suffix = a:1
-    else
-        let command_suffix = ""
-    endif
+" nnoremap <leader>c :w\|:!script/features<cr>
+" nnoremap <leader>w :w\|:!script/features --profile wip<cr>
 
-    " Run the tests for the previously-marked file.
-    let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.py\)$') != -1
-    if in_test_file
-        call SetTestFile(command_suffix)
-    elseif !exists("t:grb_test_file")
-        return
-    end
-    call RunTests(t:grb_test_file . command_suffix)
-endfunction
+" function! RunTestFile(...)
+"     if a:0
+"         let command_suffix = a:1
+"     else
+"         let command_suffix = ""
+"     endif
+
+"     " Run the tests for the previously-marked file.
+"     let in_test_file = match(expand("%"), '\(.feature\|_spec.rb\|_test.py\)$') != -1
+"     if in_test_file
+"         call SetTestFile(command_suffix)
+"     elseif !exists("t:grb_test_file")
+"         return
+"     end
+"     call RunTests(t:grb_test_file . command_suffix)
+" endfunction
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " RemoveFancyCharacters COMMAND
@@ -236,11 +218,11 @@ set formatoptions=qrn1
 
 " set colorcolumn=85 " color nth column
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
+ " Switch syntax highlighting on, when the terminal has colors
+ " Also switch on highlighting the last used search pattern.
+ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
+   syntax on
+ endif
 
 if filereadable(expand("~/.vimrc.bundles"))
   source ~/.vimrc.bundles
@@ -259,7 +241,7 @@ augroup vimrcEx
     \   exe "normal g`\"" |
     \ endif
 
-  "for ruby, autoindent with two spaces, always expand tabs
+  " for ruby, autoindent with two spaces, always expand tabs
   autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
   autocmd FileType python set sw=4 sts=4 et
 
@@ -289,11 +271,17 @@ augroup vimrcEx
 augroup END
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" CUSTOM ENTER KEY
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! MapCR()
+  nnoremap <cr> :nohl<cr>
+endfunction
+call MapCR()
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " COLOR
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set t_Co=256 " 256 colors
-" :set background=dark
-" :color solarized
+set t_Co=256 " 256 colors
 
 " Color scheme
 set background=dark
@@ -306,7 +294,7 @@ set tabstop=2
 set softtabstop=2
 set shiftwidth=2
 " set shiftround
-set expandtab
+" set expandtab
 
 " Display extra whitespace
 set listchars=tab:▸\·,trail:·,eol:¬
@@ -324,27 +312,30 @@ if executable('ag')
   let g:ctrlp_use_caching = 0
 endif
 
-" Numbers
-" set numberwidth=4
-
 " Tab completion
 " will insert tab at beginning of line,
 " will use completion if not at beginning
 set wildmode=list:longest,list:full
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
-inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
-
+" function! InsertTabWrapper()
+"     let col = col('.') - 1
+"     if !col || getline('.')[col - 1] !~ '\k'
+"         return "\<tab>"
+"     else
+"         return "\<c-p>"
+"     endif
+" endfunction
+" inoremap <Tab> <c-r>=InsertTabWrapper()<cr>
+" function! Tab_Or_Complete()
+"   if col('.')>1 && strpart( getline('.'), col('.')-2, 3 ) =~ '^\w'
+"     return "\<C-N>"
+"   else
+"     return "\<Tab>"
+"   endif
+" endfunction
+" inoremap <Tab> <C-R>=Tab_Or_Complete()<CR>
+"
 " Index ctags from any project, including those outside Rails
 map <leader>ct :!ctags -R %%<CR>
-
-" map <Leader>re :so ~/.vimrc<cr>
 
 " Switch between the last two files
 nnoremap <leader><leader> <c-^>
@@ -358,7 +349,7 @@ nnoremap j gj
 nnoremap k gk
 
 " Treat <li> and <p> tags like the block tags they are
-let g:html_indent_tags = 'li\|p'
+" let g:html_indent_tags = 'li\|p'
 
 " Open new split panes to right and bottom, which feels more natural
 set splitbelow
@@ -390,31 +381,30 @@ inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
 
-nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>           " strip eof whitespace
 " nnoremap <leader>ft Vatzf                                  " fold tags
 nnoremap <leader>S ?{<CR>jV/^\s*\}?$<CR>k:sort<CR>:noh<CR> " sort CSS props
 nnoremap <leader>q gqip                                    " hard rewrap parahraph
 
 nnoremap <leader>v V`]                                     " reselect the text that was just pasted
 nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>         " vedit ~/.vimrc
+nnoremap <Leader>re :so ~/.vimrc<cr>                       " reload ~/.vimrc
 
 " configure syntastic syntax checking to check on open as well as save
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
 
-" set statusline+=%*
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_always_populate_loc_list = 0
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_always_populate_loc_list = 0
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 0
+" let g:syntastic_check_on_wq = 0
 
-let g:move_key_modifier='C'
+" let g:move_key_modifier='C'
 
 nmap <F2> ^y$:<C-R>"<CR>
 map <F5> :set nowrap!<CR>
 map <F6> :set spell!<CR>
-
 
 " Local config
 if filereadable($HOME . "/.vimrc.local")
@@ -425,12 +415,23 @@ endif
 nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
-" UltiSnips
+let g:UltiSnipsEditSplit="vertical"
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 " let g:UltiSnipsEditSplit="vertical"
-" let g:UltiSnipsExpandTrigger="<tab>"
-" let g:UltiSnipsJumpForwardTrigger="<c-b>"
-" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-" let g:UltiSnipsEditSplit="vertical"
+
+" let g:UltiSnipsExpandTrigger = "<nop>"
+let g:ulti_expand_or_jump_res = 0
+" function ExpandSnippetOrCarriageReturn()
+"     let snippet = UltiSnips#ExpandSnippetOrJump()
+"     if g:ulti_expand_or_jump_res > 0
+"         return snippet
+"     else
+"         return "\<CR>"
+"     endif
+" endfunction
+" inoremap <expr> <CR> pumvisible() ? "<C-R>=ExpandSnippetOrCarriageReturn()<CR>" : "\<CR>"
 
 " go-vim
 let g:go_fmt_command = "goimports"
@@ -443,29 +444,29 @@ nnoremap <Space> za
 vnoremap <Space> za
 
 " tabular
-if exists(":Tabularize")
-	nmap <Leader>a= :Tabularize /=<CR>
-	vmap <Leader>a= :Tabularize /=<CR>
-	nmap <Leader>a, :Tabularize /,<CR>
-	vmap <Leader>a, :Tabularize /,<CR>
-	nmap <Leader>a: :Tabularize /:\zs<CR>
-	vmap <Leader>a: :Tabularize /:\zs<CR>
-	nmap <Leader>a\| :Tabularize /\|<CR>
-	vmap <Leader>a\| :Tabularize /\|<CR>
-endif
+" if exists(":Tabularize")
+" 	nmap <Leader>a= :Tabularize /=<CR>
+" 	vmap <Leader>a= :Tabularize /=<CR>
+" 	nmap <Leader>a, :Tabularize /,<CR>
+" 	vmap <Leader>a, :Tabularize /,<CR>
+" 	nmap <Leader>a: :Tabularize /:\zs<CR>
+" 	vmap <Leader>a: :Tabularize /:\zs<CR>
+" 	nmap <Leader>a\| :Tabularize /\|<CR>
+" 	vmap <Leader>a\| :Tabularize /\|<CR>
+" endif
 
-inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
+" inoremap <silent> <Bar>   <Bar><Esc>:call <SID>align()<CR>a
 
-function! s:align()
-  let p = '^\s*|\s.*\s|\s*$'
-  if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
-    let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
-    let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
-    Tabularize/|/l1
-    normal! 0
-    call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
-  endif
-endfunction
+" function! s:align()
+"   let p = '^\s*|\s.*\s|\s*$'
+"   if exists(':Tabularize') && getline('.') =~# '^\s*|' && (getline(line('.')-1) =~# p || getline(line('.')+1) =~# p)
+"     let column = strlen(substitute(getline('.')[0:col('.')],'[^|]','','g'))
+"     let position = strlen(matchstr(getline('.')[0:col('.')],'.*|\s*\zs.*'))
+"     Tabularize/|/l1
+"     normal! 0
+"     call search(repeat('[^|]*|',column).'\s\{-\}'.repeat('.',position),'ce',line('.'))
+"   endif
+" endfunction
 
 " Show syntax highlighting groups for word under cursor
 nmap <Leader>p :call <SID>SynStack()<CR>
@@ -484,11 +485,11 @@ let g:closetag_filenames = "*.erb,*.html,*.xhtml,*.phtml,*.eex"
 " autoremove traililng spaces
 autocmd BufWritePre *.py :%s/\s\+$//e
 
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
+" nmap <silent> <leader>t :TestNearest<CR>
+" nmap <silent> <leader>T :TestFile<CR>
+" nmap <silent> <leader>a :TestSuite<CR>
+" nmap <silent> <leader>l :TestLast<CR>
+" nmap <silent> <leader>g :TestVisit<CR>
 
 " CtrlP
 let g:ctrlp_show_hidden = 1
@@ -498,3 +499,11 @@ nnoremap <silent> <F8> :TagbarToggle<CR>
 " let g:tagbar_autofocus = 1
 let g:tagbar_show_linenumbers = 0
 " let g:tagbar_autoshowtag = 1
+"
+" Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+" let g:UltiSnipsExpandTrigger="<c-q>"
+" let g:UltiSnipsJumpForwardTrigger="<c-b>"
+" let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" If you want :UltiSnipsEdit to split your window.
+let g:UltiSnipsEditSplit="vertical"
