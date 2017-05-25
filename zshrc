@@ -22,7 +22,11 @@ function check_last_exit_code() {
 }
 
 function ruby_version() {
-  echo "[$(rbenv version | awk '{print $1}')] "
+  echo "$(rbenv version | awk '{print $1}')"
+}
+
+function python_version() {
+  echo "$(pyenv version | awk '{print $1}')"
 }
 
 jobs_prompt_info() {
@@ -79,7 +83,7 @@ git_remote_status() {
 }
 
 setopt promptsubst
-PS1='%{$fg[white]%}$(ruby_version)%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
+PS1='%{$fg[white]%}[$(ruby_version), $(python_version)] %{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
@@ -157,6 +161,8 @@ export GOPATH=$HOME/source/go
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
+export PATH="/usr/local/bin:$PATH"
+
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
 
@@ -166,10 +172,10 @@ export PATH=$PATH:$GOPATH/bin
 export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 
 # load rbenv if available
-if which rbenv &>/dev/null; then eval "$(rbenv init - zsh --no-rehash)"; fi
+if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 
 # load pyenv if available
-if which pyenv &>/dev/null; then eval "$(pyenv init - --no-rehash)"; fi
+if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
 
 # load exenv if available
 if which exenv > /dev/null; then eval "$(exenv init -)"; fi
@@ -180,8 +186,6 @@ export PATH="$HOME/.nodenv/shims:$PATH"
 
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
-
-export PATH="/usr/local/bin:$PATH"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
