@@ -158,6 +158,9 @@ export VIRTUALENV_DISTRIBUTE=true
 # GoLang
 export GOPATH=$HOME/source/go
 
+# Docker
+export DOCKER_DATA_DIR=$HOME/.docker-data
+
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
@@ -195,4 +198,6 @@ export PATH=".git/safe/../../bin:$PATH"
 
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+
+# MySQL (brew service)
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
