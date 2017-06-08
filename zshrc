@@ -180,9 +180,6 @@ if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 # load pyenv if available
 if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
 
-# load exenv if available
-if which exenv > /dev/null; then eval "$(exenv init -)"; fi
-
 # load nodenv if available
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 export PATH="$HOME/.nodenv/shims:$PATH"
