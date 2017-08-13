@@ -21,10 +21,6 @@ function check_last_exit_code() {
   fi
 }
 
-function ruby_version() {
-  echo "$(rbenv version | awk '{print $1}')"
-}
-
 jobs_prompt_info() {
 	if [[ `jobs | wc -l` -ne 0 ]]; then
 		echo " %{$fg_bold[red]%}$(jobs | tr -d \"+\-\" | tr -s ' ' | awk '{print $3}' | xargs)%{$reset_color%}"
@@ -79,7 +75,7 @@ git_remote_status() {
 }
 
 setopt promptsubst
-PS1='%{$fg[white]%}[$(ruby_version)] %{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
+PS1='%{$fg[white]%}%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
 # PS1='%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
@@ -173,9 +169,12 @@ export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
+#
+# load pyenv if available
+if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
 
 # load nodenv if available
-# if which nodenv &>/dev/null; then eval "$(nodenv init - zsh)"; fi
+if which nodenv &>/dev/null; then eval "$(nodenv init - zsh)"; fi
 # if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 
 # mkdir .git/safe in the root of repositories you trust
