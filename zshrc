@@ -185,6 +185,7 @@ export PATH=".git/safe/../../bin:$PATH"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
+[[ -f ~/.aliases.local ]] && source ~/.aliases.local
 
 # Local config
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
