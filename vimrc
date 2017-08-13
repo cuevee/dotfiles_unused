@@ -49,7 +49,7 @@ set visualbell
 set cursorline
 set ttyfast
 set number
-set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
+" set relativenumber    " Show the line number relative to the line with the cursor in front of each line.
 set numberwidth=4
 " make searches case-sensitive only if they contain upper-case characters
 set ignorecase smartcase
@@ -293,8 +293,8 @@ colorscheme hybrid
 set tabstop=2
 set softtabstop=2
 set shiftwidth=2
+set expandtab
 " set shiftround
-" set expandtab
 
 " Display extra whitespace
 set listchars=tab:▸\·,trail:·,eol:¬
@@ -507,3 +507,6 @@ let g:tagbar_show_linenumbers = 0
 
 " If you want :UltiSnipsEdit to split your window.
 let g:UltiSnipsEditSplit="vertical"
+
+" Git diff map
+map <leader>d :Gdiff<cr>
