@@ -127,6 +127,7 @@ unsetopt nomatch
 # handy keybindings
 # bindkey "^A" beginning-of-line
 # bindkey "^E" end-of-line
+bindkey -v
 bindkey "^R" history-incremental-search-backward
 bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # bindkey "^P" history-search-backward
