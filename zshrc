@@ -34,6 +34,13 @@ git_prompt_info() {
 	fi
 }
 
+git_stash_info() {
+  stash_file="$( git rev-parse --git-dir )/logs/refs/stash"
+  if [[ -e "${stash_file}" ]]; then
+    echo "%{$fg_bold[red]%} ⚑%{$reset_color%}"
+  fi
+}
+
 parse_git_dirty() {
   local STATUS=''
   local FLAGS
@@ -75,7 +82,7 @@ git_remote_status() {
 }
 
 setopt promptsubst
-PS1='%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(jobs_prompt_info) %# '
+PS1='%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
