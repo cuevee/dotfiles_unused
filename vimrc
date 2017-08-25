@@ -390,9 +390,9 @@ nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>         " vedit ~/.vimrc
 nnoremap <Leader>re :so ~/.vimrc<cr>                       " reload ~/.vimrc
 
 " configure syntastic syntax checking to check on open as well as save
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 
 " let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
 " let g:syntastic_always_populate_loc_list = 0
