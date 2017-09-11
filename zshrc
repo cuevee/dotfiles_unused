@@ -35,9 +35,9 @@ git_prompt_info() {
 }
 
 git_stash_info() {
-  stash_file="$( git rev-parse --git-dir )/logs/refs/stash"
-  if [[ -e "${stash_file}" ]]; then
-    echo "%{$fg_bold[red]%} ⚑%{$reset_color%}"
+  # if [[ -f "${stash_file}" ]]; then
+  if [[ -d .git && -f "$( git rev-parse --git-dir )/logs/refs/stash" ]]; then
+    echo "%{$fg_bold[green]%} ⚑%{$reset_color%}"
   fi
 }
 
