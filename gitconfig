@@ -4,10 +4,10 @@
   rebase = true
 [color]
   diff = auto
-  status = auto
+  status = true
   branch = auto
   interactive = auto
-  ui = true
+  ui = always
   pager = true
 [alias]
   st = status
