@@ -224,9 +224,9 @@ set formatoptions=qrn1
    syntax on
  endif
 
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+" if filereadable(expand("~/.vimrc.bundles"))
+"   source ~/.vimrc.bundles
+" endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
@@ -285,7 +285,7 @@ set t_Co=256 " 256 colors
 
 " Color scheme
 set background=dark
-let g:hybrid_custom_term_colors = 1
+" let g:hybrid_custom_term_colors = 1
 " let g:hybrid_reduced_contrast = 1 " Remove this line if using the default palette.
 colorscheme hybrid
 
@@ -510,3 +510,40 @@ let g:UltiSnipsEditSplit="vertical"
 
 " Git diff map
 map <leader>d :Gdiff<cr>
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'VundleVim/Vundle.vim'
+
+" Define bundles via Github repos
+Plug 'danro/rename.vim'
+Plug 'kien/ctrlp.vim'
+" Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/ctags.vim'
+Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-repeat'
+Plug 'rking/ag.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'vim-ruby/vim-ruby'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'fatih/vim-go'
+" Plug 'Valloric/YouCompleteMe'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
+" Plug 'kana/vim-textobj-entire'
+" Plug 'dhruvasagar/vim-table-mode'
+Plug 'alvan/vim-closetag'
+Plug 'janko-m/vim-test'
+" Plug 'FredKSchott/CoVim'
+Plug 'majutsushi/tagbar'
+
+" Evaluate
+Plug 'kchmck/vim-coffee-script'
+
+call plug#end()
