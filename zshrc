@@ -164,8 +164,6 @@ export DOCKER_DATA_DIR=$HOME/.docker-data
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
-export PATH="/usr/local/bin:$PATH"
-
 # mkdir .git/safe in the root of repositories you trust
 export PATH=".git/safe/../../bin:$PATH"
 
