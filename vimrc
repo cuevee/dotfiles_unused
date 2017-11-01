@@ -3,8 +3,8 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Use Vim settings, rather then Vi settings. This setting must be as early as
 " possible, as it has side effects.
-set nocompatible
-filetype plugin indent on
+" set nocompatible
+" filetype plugin indent on
 set omnifunc=syntaxcomplete#Complete
 
 " Leader
