@@ -200,3 +200,6 @@ export PATH=".git/safe/../../bin:$PATH"
 
 # MySQL (brew service)
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
+
+. $HOME/.asdf/asdf.sh
+. $HOME/.asdf/completions/asdf.bash
