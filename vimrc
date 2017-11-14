@@ -509,26 +509,40 @@ let g:UltiSnipsEditSplit="vertical"
 " Git diff map
 map <leader>d :Gdiff<cr>
 
-packadd minpac
-call minpac#init()
+call plug#begin('~/.vim/plugged')
 
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('danro/rename.vim')
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('vim-scripts/tComment')
-call minpac#add('rking/ag.vim')
-call minpac#add('tpope/vim-rails')
-call minpac#add('vim-ruby/vim-ruby')
-call minpac#add('honza/vim-snippets')
-call minpac#add('fatih/vim-go')
-call minpac#add('nelstrom/vim-markdown-folding')
-call minpac#add('godlygeek/tabular')
-call minpac#add('tpope/vim-markdown')
-call minpac#add('dhruvasagar/vim-table-mode')
-call minpac#add('alvan/vim-closetag')
-call minpac#add('janko-m/vim-test')
-call minpac#add('majutsushi/tagbar')
-call minpac#add('junegunn/fzf')
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
+Plug 'VundleVim/Vundle.vim'
+
+" Define bundles via Github repos
+Plug 'danro/rename.vim'
+Plug 'kien/ctrlp.vim'
+" Plug 'scrooloose/syntastic'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
+Plug 'vim-scripts/ctags.vim'
+Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-repeat'
+Plug 'rking/ag.vim'
+Plug 'davidhalter/jedi-vim'
+Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
+Plug 'vim-ruby/vim-ruby'
+Plug 'honza/vim-snippets'
+Plug 'SirVer/ultisnips'
+Plug 'fatih/vim-go'
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-markdown'
+" Plug 'kana/vim-textobj-entire'
+" Plug 'dhruvasagar/vim-table-mode'
+Plug 'alvan/vim-closetag'
+Plug 'janko-m/vim-test'
+" Plug 'FredKSchott/CoVim'
+Plug 'majutsushi/tagbar'
+
+" Evaluate
+Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+Plug 'kchmck/vim-coffee-script'
+
+call plug#end()
