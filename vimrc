@@ -1,5 +1,5 @@
-" BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" BASIC EDITING CONFIGURATION
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set omnifunc=syntaxcomplete#Complete
 
@@ -9,13 +9,11 @@ let mapleader = ","
 nnoremap / /\v
 vnoremap / /\v
 
-set dictionary=/usr/share/dict/words
-
 set breakindent                                     " wrap lines without changing the amount of indent
 set backspace=2                                     " Backspace deletes like most programs in insert mode
 set nobackup                                        " don't make backups at all
 set nowritebackup
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=/tmp
 set noswapfile                                      " http://robots.thoughtbot.com/post/18739402579/global-gitignore#comment-458413287
 set history=10000
 set ruler                                           " show the cursor position all the time
@@ -115,8 +113,6 @@ command! RemoveFancyCharacters :call RemoveFancyCharacters()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " CUSTOM AUTOCMDS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-autocmd BufWritePost .vimrc source $MYVIMRC
-
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
