@@ -1,14 +1,14 @@
 # Setup fzf
 # ---------
-if [[ ! "$PATH" == */Users/quintis/.fzf/bin* ]]; then
-  export PATH="$PATH:/Users/quintis/.fzf/bin"
+if [[ ! "$PATH" == */Users/quintis/.vim/plugged/fzf/bin* ]]; then
+  export PATH="$PATH:/Users/quintis/.vim/plugged/fzf/bin"
 fi
 
 # Auto-completion
 # ---------------
-[[ $- == *i* ]] && source "/Users/quintis/.fzf/shell/completion.zsh" 2> /dev/null
+[[ $- == *i* ]] && source "/Users/quintis/.vim/plugged/fzf/shell/completion.zsh" 2> /dev/null
 
 # Key bindings
 # ------------
-source "/Users/quintis/.fzf/shell/key-bindings.zsh"
+source "/Users/quintis/.vim/plugged/fzf/shell/key-bindings.zsh"
 
