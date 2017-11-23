@@ -151,7 +151,7 @@ call MapCR()
 set t_Co=256 " 256 colors
 
 " Color scheme
-set background=dark
+set background=light
 colorscheme solarized
 
 " Softtabs, 2 spaces
@@ -280,7 +280,7 @@ call plug#begin('~/.vim/plugged')
 
 " Define bundles via Github repos
 Plug 'danro/rename.vim'
-Plug 'kien/ctrlp.vim'
+" Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
