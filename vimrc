@@ -152,7 +152,7 @@ set t_Co=256 " 256 colors
 
 " Color scheme
 set background=dark
-colorscheme hybrid
+colorscheme solarized
 
 " Softtabs, 2 spaces
 set tabstop=8         " make literal tabs clearly visible
@@ -199,10 +199,10 @@ set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_always_populate_loc_list = 0
+let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 0
-let g:syntastic_check_on_wq = 0
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 1
 
 let g:UltiSnipsExpandTrigger = '<C-j>'
 
@@ -288,18 +288,18 @@ Plug 'vim-scripts/ctags.vim'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-repeat'
 Plug 'rking/ag.vim'
-Plug 'davidhalter/jedi-vim'
-Plug 'tpope/vim-rails'
+Plug 'davidhalter/jedi-vim', { 'for': 'python' }
+Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-unimpaired'
-Plug 'vim-ruby/vim-ruby'
+Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'godlygeek/tabular'
-Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'janko-m/vim-test'
 Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
 
