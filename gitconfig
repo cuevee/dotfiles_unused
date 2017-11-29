@@ -69,9 +69,9 @@
 [branch]
   autosetupmerge = true
 [core]
-	excludesfile = /Users/quintis/.gitignore
+  excludesfile = /Users/quintis/.gitignore
   autocrlf = input
-  editor = vim
+  editor = nvim
 [merge]
   ff = only
   tool = opendiff
@@ -79,19 +79,19 @@
   path = .gitconfig.local
 [commit]
   template = ~/.gitmessage
-	gpgsign = true
+  gpgsign = true
 [fetch]
   prune = true
 [user]
-	name = Quintis Venter
-	email = quintis@quint.is
-	signingkey = DCC2E34E32F1E66D
+  name = Quintis Venter
+  email = quintis@quint.is
+  signingkey = DCC2E34E32F1E66D
 [rerere]
   enabled = true
 [diff]
   tool=opendiff
 [difftool]
-      prompt = false
+  prompt = false
 [difftool "opendiff"]
   cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
   path =
@@ -107,8 +107,8 @@
 [credential]
   helper = osxkeychain
 [difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path = 
+  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+  path =
 [mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
+  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+  trustExitCode = true
