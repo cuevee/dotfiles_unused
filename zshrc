@@ -172,12 +172,16 @@ export PATH=$PATH:$GOPATH/bin
 
 export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 
+# load exenv if available
+if which exenv &>/dev/null; then eval "$(exenv init - zsh)"; fi
+export PATH="$HOME/.exenv/bin:$PATH"
+
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
-#
+
 # load pyenv if available
 export PYENV_ROOT="$HOME/.pyenv"
-if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
+# if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
 
 # load nodenv if available
 # if which nodenv &>/dev/null; then eval "$(nodenv init - zsh)"; fi
@@ -195,8 +199,5 @@ if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 
 # MySQL (brew service)
 export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
-
-. $HOME/.asdf/asdf.sh
-. $HOME/.asdf/completions/asdf.bash
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
