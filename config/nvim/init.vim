@@ -177,7 +177,7 @@ set statusline+=%*
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " set termguicolors
 set background=dark
-colorscheme solarized
+colorscheme hybrid_material
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -235,6 +235,14 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS: LIMELIGHT
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+let g:limelight_default_coefficient = 0.7
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: PACKAGING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 packadd minpac
@@ -245,18 +253,24 @@ call minpac#add('tpope/vim-fugitive')
 call minpac#add('tpope/vim-surround')
 call minpac#add('tpope/vim-endwise')
 call minpac#add('vim-ruby/vim-ruby')
+call minpac#add('fatih/vim-go')
 call minpac#add('vim-scripts/tComment')
 call minpac#add('SirVer/ultisnips')
 call minpac#add('Valloric/YouCompleteMe')
 call minpac#add('scrooloose/syntastic')
 call minpac#add('honza/vim-snippets')
-call minpac#add('fatih/vim-go')
 call minpac#add('rking/ag.vim')
 call minpac#add('nelstrom/vim-markdown-folding')
 call minpac#add('godlygeek/tabular')
 call minpac#add('junegunn/fzf')
 call minpac#add('janko-m/vim-test')
 call minpac#add('altercation/vim-colors-solarized')
+call minpac#add('kristijanhusak/vim-hybrid-material')
+call minpac#add('junegunn/goyo.vim')
+call minpac#add('junegunn/limelight.vim')
+call minpac#add('tpope/vim-rails')
+call minpac#add('elixir-lang/vim-elixir')
+call minpac#add('slashmili/alchemist.vim')
 
 call minpac#add('tpope/vim-projectionist', {'type': 'opt'})
 call minpac#add('davidhalter/jedi-vim', {'type': 'opt'})
