@@ -1,9 +1,6 @@
 Pry.config.theme = "solarized"
 Pry.config.editor = "vim"
 
-require 'awesome_print'
-AwesomePrint.pry!
-
 # Pry.config.prompt = Pry::NAV_PROMPT
 
 Pry.config.hooks.add_hook(:after_session, :say_bye) { puts "Adios! Keep hacking!" }
