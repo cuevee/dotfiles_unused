@@ -22,7 +22,7 @@ set incsearch                                       " do incremental searching
 set laststatus=2                                    " Always display the status line
 set autowrite                                       " Automatically :write before running commands
 set hls                                             " highlight and incremental search
-set clipboard=unnamed                               " use system clipboard
+set clipboard=unnamedplus                           " use system clipboard
 set noeb vb t_vb=                                   " disable bell
 set encoding=utf-8
 set switchbuf=useopen
@@ -151,8 +151,8 @@ call MapCR()
 set t_Co=256 " 256 colors
 
 " Color scheme
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme hybrid_material
 
 " Softtabs, 2 spaces
 set tabstop=8         " make literal tabs clearly visible
@@ -279,6 +279,7 @@ map <leader>d :Gdiff<cr>
 call plug#begin('~/.vim/plugged')
 
 " Define bundles via Github repos
+Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'danro/rename.vim'
 " Plug 'kien/ctrlp.vim'
 Plug 'scrooloose/syntastic'
@@ -287,7 +288,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-scripts/ctags.vim'
 Plug 'vim-scripts/tComment'
 Plug 'tpope/vim-repeat'
-Plug 'rking/ag.vim'
+" Plug 'rking/ag.vim'
+Plug 'jremmen/vim-ripgrep'
 Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 Plug 'tpope/vim-rails', { 'for': 'ruby' }
 Plug 'tpope/vim-endwise'
