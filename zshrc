@@ -197,7 +197,5 @@ if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
-# MySQL (brew service)
-export PATH="/usr/local/opt/mysql@5.6/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
