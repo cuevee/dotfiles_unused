@@ -1,7 +1,6 @@
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set nocompatible
 filetype plugin indent on
 
 set breakindent                                     " wrap lines without changing the amount of indent
@@ -45,7 +44,6 @@ set autoread                                        " If a file is changed outsi
 set nojoinspaces                                    " Insert only one space when joining lines that contain sentence-terminating punctuation like `.`.
 set nowrap
 set splitbelow splitright                           " Open new split panes to right and bottom, which feels more natural
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL: MAPPINGS
