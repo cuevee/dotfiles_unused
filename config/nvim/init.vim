@@ -181,8 +181,8 @@ colorscheme hybrid_material
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROVIDERS: PYTHON
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_host_prog = 'python2'
-let g:python3_host_prog = 'python3'
+" let g:python_host_prog = 'python2'
+" let g:python3_host_prog = 'python3'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -254,7 +254,7 @@ call minpac#add('vim-ruby/vim-ruby')
 call minpac#add('fatih/vim-go')
 call minpac#add('vim-scripts/tComment')
 call minpac#add('SirVer/ultisnips')
-call minpac#add('Valloric/YouCompleteMe')
+call minpac#add('Valloric/YouCompleteMe', {'type':'opt'})
 call minpac#add('scrooloose/syntastic')
 call minpac#add('honza/vim-snippets')
 call minpac#add('rking/ag.vim', {'type': 'opt'})
