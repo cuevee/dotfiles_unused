@@ -181,11 +181,12 @@ if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 
 # load pyenv if available
 export PYENV_ROOT="$HOME/.pyenv"
-# if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
+if which pyenv &>/dev/null; then eval "$(pyenv init - zsh)"; fi
 
 # load nodenv if available
 # if which nodenv &>/dev/null; then eval "$(nodenv init - zsh)"; fi
 if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
+export PATH="$HOME/.nodenv/shims:$PATH"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
