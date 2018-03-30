@@ -40,10 +40,6 @@
   st = status
   up = !git fetch origin && git rebase origin/master
 
-  create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
-  delete-branch = !sh -c 'git push origin :refs/heads/$1 && git remote prune origin && git branch -D $1' -
-  merge-branch = !git checkout master && git merge @{-1}
-
   # Divergence (commits we added and commits remote added)
   div = divergence
 
@@ -74,7 +70,7 @@
   editor = nvim
 [merge]
   ff = only
-	tool = opendiff
+  tool = opendiff
 [include]
   path = .gitconfig.local
 [commit]
@@ -107,12 +103,6 @@
   postBuffer = 157286400
 [credential]
   helper = osxkeychain
-[difftool "sourcetree"]
-  cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-  path =
-[mergetool "sourcetree"]
-  cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-  trustExitCode = true
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f
