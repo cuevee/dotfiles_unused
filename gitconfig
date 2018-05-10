@@ -79,8 +79,8 @@
 [fetch]
   prune = true
 [user]
-	name = Quintis Venter
-	email = quintis@quint.is
+  name = Quintis Venter
+  email = quintis@quint.is
   signingkey = DCC2E34E32F1E66D
 [rerere]
   enabled = true
@@ -94,7 +94,7 @@
   path =
   # cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 [mergetool "opendiff"]
-	cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
+  cmd = /usr/bin/opendiff \"$LOCAL\" \"$REMOTE\" -merge \"$MERGED\" | cat
   path =
 # [mergetool "sourcetree"]
 #   cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
