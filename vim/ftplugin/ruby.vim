@@ -1,1 +1,0 @@
-/Users/quintis/.dotfiles.private/vim/ftplugin/ruby.vim
