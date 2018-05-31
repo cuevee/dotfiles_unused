@@ -1,8 +1,9 @@
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL:
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 
+set nocompatible                                    " Be iMproved
 set breakindent                                     " wrap lines without changing the amount of indent
 set backspace=2                                     " Backspace deletes like most programs in insert mode
 set nobackup                                        " don't make backups at all
@@ -112,7 +113,6 @@ augroup END
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL: FUNCTIONS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -182,8 +182,7 @@ colorscheme hybrid_material
 " PROVIDERS: PYTHON
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " let g:python_host_prog = 'python2'
-" let g:python3_host_prog = 'python3'
-
+let g:python3_host_prog = 'python'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: FUGITIVE
@@ -239,6 +238,33 @@ let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_default_coefficient = 0.7
 
+" " Required:
+" set runtimepath+=/Users/quintis/.cache/dein/repos/github.com/Shougo/dein.vim
+"
+" " Required:
+" if dein#load_state('/Users/quintis/.cache/dein')
+"   call dein#begin('/Users/quintis/.cache/dein')
+"
+"   " Let dein manage dein
+"   " Required:
+"   call dein#add('/Users/quintis/.cache/dein/repos/github.com/Shougo/dein.vim')
+"
+"   " Add or remove your plugins here:
+"   call dein#add('Shougo/neosnippet.vim')
+"   call dein#add('Shougo/neosnippet-snippets')
+"
+"   " You can specify revision/branch/tag.
+"   call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
+"
+"   " Required:
+"   call dein#end()
+"   call dein#save_state()
+" endif
+"
+" " If you want to install not installed plugins on startup.
+" if dein#check_install()
+"   call dein#install()
+" endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: PACKAGING
