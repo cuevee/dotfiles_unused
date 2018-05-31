@@ -1,1 +1,1 @@
-nnoremap <C-p> :<C-u>FZF<CR>
+/Users/quintis/.dotfiles/vim/after/plugin/fzf-mappings.vim

@@ -1,0 +1,1 @@
+/Users/quintis/.dotfiles.private/vim/ftplugin/go.vim
