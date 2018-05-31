@@ -67,7 +67,6 @@
 [core]
   excludesfile = /Users/quintis/.gitignore
   autocrlf = input
-  editor = nvim
 [merge]
   ff = only
   tool = opendiff

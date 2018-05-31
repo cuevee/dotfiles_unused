@@ -81,6 +81,11 @@ git_remote_status() {
     fi
 }
 
+# edit current command in $VISUAL
+autoload -U edit-command-line
+zle -N edit-command-line
+bindkey '^x^e' edit-command-line
+
 setopt promptsubst
 PS1='%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
@@ -169,6 +174,7 @@ export PATH=".git/safe/../../bin:$PATH"
 
 export PATH="$HOME/bin:/usr/local/bin:/usr/local/sbin:$PATH"
 export PATH=$PATH:$GOPATH/bin
+export PATH="$HOME/.fastlane/bin:$PATH"
 
 export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 
@@ -180,13 +186,16 @@ export PATH="$HOME/.exenv/bin:$PATH"
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 
 # load pyenv if available
-export PYENV_ROOT="$HOME/.pyenv"
-if which pyenv &>/dev/null; then eval "$(pyenv init -)"; fi
+# export PYENV_ROOT="$HOME/.pyenv"
+# if which pyenv &>/dev/null; then eval "$(pyenv init -)"; fi
 
 # load nodenv if available
 # if which nodenv &>/dev/null; then eval "$(nodenv init - zsh)"; fi
 if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 export PATH="$HOME/.nodenv/shims:$PATH"
+
+# anacondas
+export PATH="/usr/local/anaconda3/bin:/usr/local/anaconda2/bin:$PATH"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -198,5 +207,7 @@ export PATH="$HOME/.nodenv/shims:$PATH"
 # autojump
 [[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
 
+# fzf
+export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
