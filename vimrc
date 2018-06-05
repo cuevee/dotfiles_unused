@@ -150,7 +150,7 @@ Plug 'nelstrom/vim-markdown-folding'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'fatih/vim-go', { 'for': 'go' }
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
-Plug 'junegunn/fzf', { 'do': 'yes \| ./install' }
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
 
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
 " Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
