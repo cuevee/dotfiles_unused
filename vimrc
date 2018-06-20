@@ -15,7 +15,7 @@ set autowrite                                       " Automatically :write befor
 set backspace=2                                     " Backspace deletes like most programs in insert mode
 set backspace=indent,eol,start
 set breakindent                                     " wrap lines without changing the amount of indent
-set clipboard=unnamedplus                           " use system clipboard
+set clipboard=unnamed                               " use system clipboard
 set cursorline
 set directory=/tmp
 set encoding=utf-8
@@ -92,6 +92,8 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 nnoremap <leader>q gqip                              " hard rewrap parahraph
 nnoremap <leader>v V`]                               " reselect the text that was just pasted
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>            " vedit ~/.vimrc
+
+nnoremap <C-p> :<C-u>FZF<CR>
 
 nmap <F2> ^y$:<C-R>"<CR>
 map <F5> :set nowrap!<CR>
