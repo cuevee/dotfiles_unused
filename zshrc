@@ -1,4 +1,4 @@
-export LANG=en_US.UTF-8
+export LANG=en_US.UTF-6
 export LC_ALL=en_US.UTF-8
 
 ulimit -n 10000
@@ -15,7 +15,7 @@ function check_last_exit_code() {
   if [[ $LAST_EXIT_CODE -ne 0 ]]; then
     local EXIT_CODE_PROMPT=' '
     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
-    EXIT_CODE_PROMPT+="%{$fg_bold[red]%}$LAST_EXIT_CODE%{$reset_color%}"
+    EXIT_CODE_PROMPT+="%{$fg[red]%}$LAST_EXIT_CODE%{$reset_color%}"
     EXIT_CODE_PROMPT+="%{$fg[red]%}-%{$reset_color%}"
     echo "$EXIT_CODE_PROMPT"
   fi
@@ -23,21 +23,21 @@ function check_last_exit_code() {
 
 jobs_prompt_info() {
 	if [[ `jobs | wc -l` -ne 0 ]]; then
-		echo " %{$fg_bold[red]%}$(jobs | tr -d \"+\-\" | tr -s ' ' | awk '{print $3}' | xargs)%{$reset_color%}"
+		echo " %{$fg[red]%}$(jobs | tr -d \"+\-\" | tr -s ' ' | awk '{print $3}' | xargs)%{$reset_color%}"
 	fi
 }
 
 git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ -n $ref ]]; then
-		echo " %{$fg_bold[green]%}${ref#refs/heads/}$(parse_git_dirty)$(git_remote_status)%{$reset_color%}"
+		echo " %{$fg[green]%}${ref#refs/heads/}$(parse_git_dirty)$(git_remote_status)%{$reset_color%}"
 	fi
 }
 
 git_stash_info() {
   # if [[ -f "${stash_file}" ]]; then
   if [[ -d .git && -f "$( git rev-parse --git-dir )/logs/refs/stash" ]]; then
-    echo "%{$fg_bold[green]%} ⚑%{$reset_color%}"
+    echo "%{$fg[green]%} ⚑%{$reset_color%}"
   fi
 }
 
@@ -87,7 +87,7 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 setopt promptsubst
-PS1='%{$reset_color%}%{$fg_bold[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(jobs_prompt_info) %# '
+PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
