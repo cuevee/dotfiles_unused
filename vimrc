@@ -1,6 +1,6 @@
 " set omnifunc=syntaxcomplete#Complete
 
-filetype plugin indent on   
+filetype plugin indent on
 
 " Leader
 let mapleader = ","
@@ -145,6 +145,12 @@ if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
+" Ultisnips
+let g:UltiSnipsExpandTrigger="<c-j>"
+
+" vim-javascript
+let g:javascript_plugin_jsdoc = 1
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-unimpaired'
@@ -158,12 +164,15 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'janko-m/vim-test'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
-Plug 'fatih/vim-go', { 'for': 'go' }
+Plug 'fatih/vim-go'
 Plug 'tpope/vim-markdown', { 'for': 'markdown' }
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': 'yes \| ./install' }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'pangloss/vim-javascript'
 
 " Plug 'davidhalter/jedi-vim', { 'for': 'python' }
-" Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 " Plug 'godlygeek/tabular'
 
 call plug#end()
