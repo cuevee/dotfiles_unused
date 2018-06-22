@@ -211,3 +211,9 @@ export PATH="/usr/local/anaconda3/bin:/usr/local/anaconda2/bin:$PATH"
 export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /usr/local/bin/vault vault
+
+# direnv
+eval "$(direnv hook zsh)"
