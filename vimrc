@@ -9,6 +9,7 @@ let mapleader = ","
 " vnoremap / /\v
 
 " set ttyfast
+set termguicolors
 set autoindent
 set autoread                                        " If a file is changed outside of vim, automatically reload it without asking
 set autowrite                                       " Automatically :write before running commands
@@ -104,12 +105,14 @@ nnoremap <silent> <Leader>+ :exe "resize " . (winheight(0) * 3/2)<CR>
 nnoremap <silent> <Leader>- :exe "resize " . (winheight(0) * 2/3)<CR>
 
 nnoremap <Space> za
-vnoremap <Space> za
 
+vnoremap <Space> za
 " Color
-set t_Co=256 " 256 colors
+" set t_Co=256 " 256 colors
+" set background=dark
+" colorscheme hybrid_material
 set background=dark
-colorscheme hybrid_material
+colorscheme solarized8_dark
 
 map <leader>ct :!ctags -R %%<CR>                    " Index ctags from any project, including those outside Rails
 
@@ -136,6 +139,11 @@ nmap <silent> <leader>g :TestVisit<CR>
 
 " Git diff map
 map <leader>d :Gdiff<cr>
+
+" Neovim-specific maps
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 call plug#begin('~/.vim/plugged')
 
