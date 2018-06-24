@@ -111,8 +111,8 @@ vnoremap <Space> za
 " set t_Co=256 " 256 colors
 " set background=dark
 " colorscheme hybrid_material
-set background=dark
-colorscheme solarized8_dark
+set background=light
+colorscheme solarized8_light
 
 map <leader>ct :!ctags -R %%<CR>                    " Index ctags from any project, including those outside Rails
 
