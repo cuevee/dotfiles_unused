@@ -148,9 +148,6 @@ endif
 " Ultisnips
 let g:UltiSnipsExpandTrigger="<c-j>"
 
-" vim-javascript
-let g:javascript_plugin_jsdoc = 1
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-unimpaired'
@@ -162,6 +159,8 @@ Plug 'tpope/vim-repeat'
 Plug 'vim-scripts/tComment'
 Plug 'jremmen/vim-ripgrep'
 Plug 'janko-m/vim-test'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'vim-ruby/vim-ruby', { 'for': 'ruby' }
 Plug 'fatih/vim-go'
