@@ -27,6 +27,10 @@ jobs_prompt_info() {
 	fi
 }
 
+direnv_info() {
+        [ "$DIRENV_DIR" != "" ] && echo " %{$fg[cyan]%}!%{$reset_color%}"
+}
+
 git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null)
   if [[ -n $ref ]]; then
@@ -87,7 +91,7 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 setopt promptsubst
-PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(jobs_prompt_info) %# '
+PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(direnv_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
@@ -140,7 +144,7 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # bindkey "^N" insert-last-word
 
 # use vim as the visual editor
-export VISUAL=vim
+export VISUAL=nvim
 export EDITOR=$VISUAL
 
 # Caches
