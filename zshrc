@@ -28,7 +28,7 @@ jobs_prompt_info() {
 }
 
 direnv_info() {
-        [ "$DIRENV_DIR" != "" ] && echo " %{$fg[cyan]%}!%{$reset_color%}"
+        [ "$DIRENV_DIR" != "" ] && echo " 🔗"
 }
 
 git_prompt_info() {
