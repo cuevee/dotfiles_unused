@@ -9,7 +9,7 @@ let mapleader = ","
 " vnoremap / /\v
 
 " set ttyfast
-set termguicolors
+" set termguicolors
 set autoindent
 set autoread                                        " If a file is changed outside of vim, automatically reload it without asking
 set autowrite                                       " Automatically :write before running commands
@@ -109,10 +109,10 @@ nnoremap <Space> za
 vnoremap <Space> za
 " Color
 " set t_Co=256 " 256 colors
-" set background=dark
-" colorscheme hybrid_material
-set background=light
-colorscheme solarized8_light
+set background=dark
+colorscheme hybrid_material
+" set background=light
+" colorscheme solarized8_light
 
 map <leader>ct :!ctags -R %%<CR>                    " Index ctags from any project, including those outside Rails
 
