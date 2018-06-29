@@ -28,7 +28,7 @@ jobs_prompt_info() {
 }
 
 direnv_info() {
-        [ "$DIRENV_DIR" != "" ] && echo " 🔗"
+        [ "$DIRENV_DIR" != "" ] && echo " %{$fg[magenta]%}⦿%{$reset_color%}"
 }
 
 git_prompt_info() {
