@@ -151,7 +151,7 @@ export EDITOR=$VISUAL
 export HOMEBREW_CACHE=$HOME/Library/Caches/Homebrew
 
 # Ruby
-export RUBY_BUILD_CACHE_PATH='$HOME/.rbenv/cache'
+# export RUBY_BUILD_CACHE_PATH='$HOME/.rbenv/cache'
 
 # Python
 ## Defaults for virtualenv
@@ -187,7 +187,7 @@ if which exenv &>/dev/null; then eval "$(exenv init - zsh)"; fi
 export PATH="$HOME/.exenv/bin:$PATH"
 
 # load rbenv if available
-if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
+# if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 
 # load pyenv if available
 # export PYENV_ROOT="$HOME/.pyenv"
