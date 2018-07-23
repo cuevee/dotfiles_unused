@@ -67,6 +67,10 @@ nnoremap <C-k> :m .-2<CR>==
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 
+" Quicker tab movement
+nnoremap <C-l> :tabnext<CR>
+nnoremap <C-h> :tabprev<CR>
+
 nnoremap <leader>q gqip                                     " hard rewrap parahraph
 nnoremap <leader>v V`]                                      " reselect the text that was just pasted
 
@@ -151,6 +155,12 @@ function! <SID>SynStack() " Show syntax highlighting groups for word under curso
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" GENERAL: NEOVIM-SPECIFIC MAPPINGS
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " GENERAL: FOLDING
@@ -181,8 +191,8 @@ colorscheme hybrid_material
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROVIDERS: PYTHON
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:python_host_prog = 'python2'
-let g:python3_host_prog = 'python'
+let g:python_host_prog = 'python2'
+let g:python3_host_prog = 'python3'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: FUGITIVE
@@ -237,34 +247,6 @@ let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 let g:limelight_default_coefficient = 0.7
-
-" " Required:
-" set runtimepath+=/Users/quintis/.cache/dein/repos/github.com/Shougo/dein.vim
-"
-" " Required:
-" if dein#load_state('/Users/quintis/.cache/dein')
-"   call dein#begin('/Users/quintis/.cache/dein')
-"
-"   " Let dein manage dein
-"   " Required:
-"   call dein#add('/Users/quintis/.cache/dein/repos/github.com/Shougo/dein.vim')
-"
-"   " Add or remove your plugins here:
-"   call dein#add('Shougo/neosnippet.vim')
-"   call dein#add('Shougo/neosnippet-snippets')
-"
-"   " You can specify revision/branch/tag.
-"   call dein#add('Shougo/deol.nvim', { 'rev': 'a1b5108fd' })
-"
-"   " Required:
-"   call dein#end()
-"   call dein#save_state()
-" endif
-"
-" " If you want to install not installed plugins on startup.
-" if dein#check_install()
-"   call dein#install()
-" endif
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: PACKAGING
