@@ -234,6 +234,18 @@ endif
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS: COMFORTABLE-MOTION
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:comfortable_motion_scroll_down_key = "j"
+let g:comfortable_motion_scroll_up_key = "k"
+
+nnoremap <silent> <C-d> :call comfortable_motion#flick(80)<CR>
+nnoremap <silent> <C-u> :call comfortable_motion#flick(-80)<CR>
+
+nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
+nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: ULTISNIPS
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:UltiSnipsExpandTrigger = '<c-j>'
@@ -251,8 +263,8 @@ let g:limelight_default_coefficient = 0.7
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: PACKAGING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-packadd minpac
 call minpac#init()
+packadd minpac
 
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-fugitive')
@@ -278,6 +290,7 @@ call minpac#add('junegunn/limelight.vim')
 call minpac#add('elixir-lang/vim-elixir', {'type': 'opt'})
 call minpac#add('slashmili/alchemist.vim')
 call minpac#add('mxw/vim-jsx')
+call minpac#add('yuttie/comfortable-motion.vim')
 
 call minpac#add('tpope/vim-projectionist', {'type': 'opt'})
 call minpac#add('davidhalter/jedi-vim', {'type': 'opt'})
