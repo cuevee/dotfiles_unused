@@ -26,7 +26,8 @@ set hidden
 set wildmenu
 set wildmode=list:longest,list:full
 set visualbell
-set cursorline
+" set cursorline
+set mouse=a
 set number
 set ignorecase                                      " make searches case-sensitive only if they contain upper-case characters
 set smartcase
@@ -191,8 +192,8 @@ colorscheme hybrid_material
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PROVIDERS: PYTHON
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_host_prog = 'python2'
-let g:python3_host_prog = 'python3'
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: FUGITIVE
@@ -261,10 +262,30 @@ let g:limelight_conceal_ctermfg = 240
 let g:limelight_default_coefficient = 0.7
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS: EMMET
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:user_emmet_settings = {
+  \  'javascript.jsx' : {
+    \      'extends' : 'jsx',
+    \  },
+  \}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGINS: ALE
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:ale_fix_on_save = 1
+let g:ale_completion_enabled = 1
+let b:ale_fixers = {
+  \'javascript': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+  \'javascript.jsx': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+  \'jsx': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
+\}
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: PACKAGING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-call minpac#init()
 packadd minpac
+call minpac#init()
 
 call minpac#add('tpope/vim-unimpaired')
 call minpac#add('tpope/vim-fugitive')
@@ -289,8 +310,15 @@ call minpac#add('junegunn/goyo.vim')
 call minpac#add('junegunn/limelight.vim')
 call minpac#add('elixir-lang/vim-elixir', {'type': 'opt'})
 call minpac#add('slashmili/alchemist.vim')
-call minpac#add('mxw/vim-jsx')
 call minpac#add('yuttie/comfortable-motion.vim')
+
+call minpac#add('airblade/vim-gitgutter')
+call minpac#add('w0rp/ale')
+
+" HTML / JS / React
+call minpac#add('mxw/vim-jsx')
+call minpac#add('pangloss/vim-javascript')
+call minpac#add('mattn/emmet-vim')
 
 call minpac#add('tpope/vim-projectionist', {'type': 'opt'})
 call minpac#add('davidhalter/jedi-vim', {'type': 'opt'})
