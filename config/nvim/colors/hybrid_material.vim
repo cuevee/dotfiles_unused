@@ -117,7 +117,7 @@ let s:palette.gui.darkpurple = { 'dark' : "#5f005f"        , 'light' : "#5f005f"
 
 if exists("g:hybrid_custom_term_colors") && g:hybrid_custom_term_colors == 1
   let s:cterm_foreground = "15"  " White
-  let s:cterm_selection  = "8"   " DarkGrey
+  let s:cterm_selection  = "6"   " DarkGrey
   let s:cterm_line       = "0"   " Black
   let s:cterm_comment    = "7"   " LightGrey
   let s:cterm_red        = "9"   " LightRed
