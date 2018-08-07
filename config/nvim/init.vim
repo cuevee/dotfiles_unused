@@ -271,17 +271,6 @@ let g:user_emmet_settings = {
   \}
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: ALE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let b:ale_fixers = {
-  \'javascript': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-  \'javascript.jsx': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-  \'jsx': ['prettier', 'eslint', 'remove_trailing_lines', 'trim_whitespace'],
-\}
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGINS: PACKAGING
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 packadd minpac
@@ -313,7 +302,7 @@ call minpac#add('slashmili/alchemist.vim')
 call minpac#add('yuttie/comfortable-motion.vim')
 
 call minpac#add('airblade/vim-gitgutter')
-call minpac#add('w0rp/ale')
+call minpac#add('vim-syntastic/syntastic')
 
 " HTML / JS / React
 call minpac#add('mxw/vim-jsx')
