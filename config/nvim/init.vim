@@ -1,6 +1,3 @@
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL:
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 filetype plugin indent on
 
 set nocompatible                                    " Be iMproved
@@ -47,9 +44,26 @@ set nojoinspaces                                    " Insert only one space when
 set nowrap
 set splitbelow splitright                           " Open new split panes to right and bottom, which feels more natural
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL: MAPPINGS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" colors
+set background=dark
+colorscheme hybrid_material
+
+" providers
+let g:python_host_prog = '/usr/local/bin/python2'
+let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+
+" folding
+set foldlevelstart=0
+set foldcolumn=2
+nnoremap <Space> za
+vnoremap <Space> za
+
+" statusline
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
 let mapleader = ','
 
 nnoremap / /\v
@@ -88,10 +102,13 @@ nmap <silent> <leader>a :TestSuite<CR>
 nmap <silent> <leader>l :TestLast<CR>
 nmap <silent> <leader>g :TestVisit<CR>
 
+if has('nvim')
+  tnoremap <Esc> <C-\><C-n>
+endif
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL: AUTOCOMMANDS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" fugitive
+map <leader>d :Gdiff<cr>
+
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
@@ -118,9 +135,6 @@ augroup END
 
 autocmd BufWritePre * :%s/\s\+$//e
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL: FUNCTIONS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -156,161 +170,85 @@ function! <SID>SynStack() " Show syntax highlighting groups for word under curso
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL: NEOVIM-SPECIFIC MAPPINGS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if has('nvim')
-  tnoremap <Esc> <C-\><C-n>
-endif
+" deoplete
+let g:deoplete#enable_at_startup = 1
+" call deoplete#custom#option({
+"       \  'max_list': 100,
+"       \  'smart_case': v:true,
+"       \})
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" GENERAL: FOLDING
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set foldlevelstart=0
-set foldcolumn=2
-nnoremap <Space> za
-vnoremap <Space> za
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VISUAL: STATUS LINE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" VISUAL: COLORS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" set termguicolors
-set background=dark
-colorscheme hybrid_material
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PROVIDERS: PYTHON
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: FUGITIVE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-map <leader>d :Gdiff<cr>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: VIM-GO
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-go
 let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
 
+" syntastic
+" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
+" let g:syntastic_always_populate_loc_list = 1
+" let g:syntastic_auto_loc_list = 0
+" let g:syntastic_check_on_open = 1
+" let g:syntastic_check_on_wq = 1
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: SYNTASTIC
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 1
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: TABULARIZE
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a, :Tabularize /,<CR>
-  vmap <Leader>a, :Tabularize /,<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
-  nmap <Leader>a\| :Tabularize /\|<CR>
-  vmap <Leader>a\| :Tabularize /\|<CR>
-  vmap <Leader>a" :Tabularize /"<CR>
-  nmap <Leader>a" :Tabularize /"<CR>
-endif
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: COMFORTABLE-MOTION
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:comfortable_motion_scroll_down_key = "j"
-let g:comfortable_motion_scroll_up_key = "k"
-
-nnoremap <silent> <C-d> :call comfortable_motion#flick(80)<CR>
-nnoremap <silent> <C-u> :call comfortable_motion#flick(-80)<CR>
-
-nnoremap <silent> <C-f> :call comfortable_motion#flick(200)<CR>
-nnoremap <silent> <C-b> :call comfortable_motion#flick(-200)<CR>
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: ULTISNIPS
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" ultisnips
 let g:UltiSnipsExpandTrigger = '<c-j>'
 let g:UltiSnipsJumpForwardTrigger = '<c-j>'
 let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
 
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: LIMELIGHT
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:limelight_conceal_ctermfg = 'gray'
-let g:limelight_conceal_ctermfg = 240
-let g:limelight_default_coefficient = 0.7
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: EMMET
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" emmet
 let g:user_emmet_settings = {
   \  'javascript.jsx' : {
     \      'extends' : 'jsx',
     \  },
   \}
 
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" PLUGINS: PACKAGING
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-packadd minpac
-call minpac#init()
+" elm-vim
+let g:elm_jump_to_error = 0
+let g:elm_make_output_file = "elm.js"
+let g:elm_make_show_warnings = 0
+let g:elm_syntastic_show_warnings = 0
+let g:elm_browser_command = ""
+let g:elm_detailed_complete = 1
+let g:elm_format_autosave = 1
+let g:elm_format_fail_silently = 0
+let g:elm_setup_keybindings = 1
 
-call minpac#add('tpope/vim-unimpaired')
-call minpac#add('tpope/vim-fugitive')
-call minpac#add('tpope/vim-surround')
-call minpac#add('tpope/vim-endwise')
-call minpac#add('vim-ruby/vim-ruby', {'type':'opt'})
-call minpac#add('tpope/vim-rails', {'type': 'opt'})
-call minpac#add('fatih/vim-go')
-call minpac#add('vim-scripts/tComment')
-call minpac#add('SirVer/ultisnips')
-call minpac#add('Valloric/YouCompleteMe', {'type':'opt'})
-call minpac#add('scrooloose/syntastic')
-call minpac#add('honza/vim-snippets')
-call minpac#add('jremmen/vim-ripgrep')
-call minpac#add('nelstrom/vim-markdown-folding')
-call minpac#add('godlygeek/tabular')
-call minpac#add('junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' })
-call minpac#add('janko-m/vim-test')
-call minpac#add('altercation/vim-colors-solarized')
-call minpac#add('kristijanhusak/vim-hybrid-material')
-call minpac#add('junegunn/goyo.vim')
-call minpac#add('junegunn/limelight.vim')
-call minpac#add('elixir-lang/vim-elixir', {'type': 'opt'})
-call minpac#add('slashmili/alchemist.vim')
-call minpac#add('yuttie/comfortable-motion.vim')
+" ale
+let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
+let g:ale_completion_enabled = 1
+let g:ale_fix_on_save = 1
 
-call minpac#add('airblade/vim-gitgutter')
-call minpac#add('vim-syntastic/syntastic')
+call plug#begin('~/.local/share/nvim/plugged')
+  Plug 'tpope/vim-unimpaired'
+  Plug 'tpope/vim-surround'
+  Plug 'tpope/vim-endwise'
+  Plug 'fatih/vim-go'
+  Plug 'vim-scripts/tComment'
+  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+  Plug 'kristijanhusak/vim-hybrid-material'
 
-" HTML / JS / React
-call minpac#add('mxw/vim-jsx')
-call minpac#add('pangloss/vim-javascript')
-call minpac#add('mattn/emmet-vim')
+  Plug 'w0rp/ale'
+  Plug 'SirVer/ultisnips'
+  Plug 'honza/vim-snippets'
 
-call minpac#add('tpope/vim-projectionist', {'type': 'opt'})
-call minpac#add('davidhalter/jedi-vim', {'type': 'opt'})
+  Plug 'airblade/vim-gitgutter'
+  Plug 'elmcast/elm-vim'
 
-command! PackUpdate call minpac#update()
-command! PackClean call minpac#clean()
+  " Completion
+  if has('nvim')
+    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+  else
+    Plug 'Shougo/deoplete.nvim'
+    Plug 'roxma/nvim-yarp'
+    Plug 'roxma/vim-hug-neovim-rpc'
+  endif
+
+  " Ruby
+  Plug 'vim-ruby/vim-ruby', {'type':'opt'}
+
+  " Markdown
+  Plug 'nelstrom/vim-markdown-folding'
+
+  " HTML / JS / React
+  Plug 'pangloss/vim-javascript'
+  Plug 'mattn/emmet-vim'
+
+call plug#end()
