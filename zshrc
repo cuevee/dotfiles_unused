@@ -182,10 +182,6 @@ export PATH="$HOME/.fastlane/bin:$PATH"
 
 export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 
-# load exenv if available
-if which exenv &>/dev/null; then eval "$(exenv init - zsh)"; fi
-export PATH="$HOME/.exenv/bin:$PATH"
-
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 
