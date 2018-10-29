@@ -251,4 +251,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'pangloss/vim-javascript'
   Plug 'mattn/emmet-vim'
 
+  " Elixir
+  Plug 'elixir-editors/vim-elixir'
+
 call plug#end()
