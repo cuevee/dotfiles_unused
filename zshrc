@@ -1,4 +1,4 @@
-export LANG=en_US.UTF-6
+export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
 
 ulimit -n 10000
