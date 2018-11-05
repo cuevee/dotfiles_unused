@@ -254,4 +254,6 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Elixir
   Plug 'elixir-editors/vim-elixir'
 
+  " Reason ML
+  Plug 'reasonml-editor/vim-reason-plus'
 call plug#end()
