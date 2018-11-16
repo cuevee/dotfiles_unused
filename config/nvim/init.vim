@@ -50,7 +50,7 @@ colorscheme hybrid_material
 
 " providers
 let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
+let g:python3_host_prog = '/anaconda3/bin/python3'
 
 " folding
 set foldlevelstart=0
