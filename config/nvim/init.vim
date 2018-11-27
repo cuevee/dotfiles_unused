@@ -256,4 +256,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Reason ML
   Plug 'reasonml-editor/vim-reason-plus'
+
+  " Dart
+  Plug 'dart-lang/dart-vim-plugin'
 call plug#end()
