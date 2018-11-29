@@ -211,6 +211,9 @@ let g:elm_format_autosave = 1
 let g:elm_format_fail_silently = 0
 let g:elm_setup_keybindings = 1
 
+" crystal
+let g:crystal_auto_format = 1
+
 " ale
 let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
 let g:ale_completion_enabled = 1
@@ -259,4 +262,7 @@ call plug#begin('~/.local/share/nvim/plugged')
 
   " Dart
   Plug 'dart-lang/dart-vim-plugin'
+
+  " Crystal
+  Plug 'rhysd/vim-crystal'
 call plug#end()
