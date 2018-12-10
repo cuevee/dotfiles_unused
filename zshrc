@@ -195,7 +195,7 @@ if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 export PATH="$HOME/.nodenv/shims:$PATH"
 
 # anacondas
-export PATH="$PATH:/anaconda3/bin"
+export PATH="/usr/local/anaconda3/bin:$PATH"
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
