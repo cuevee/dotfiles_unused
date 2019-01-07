@@ -259,10 +259,10 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'elixir-editors/vim-elixir'
 
   " Reason ML
-  Plug 'reasonml-editor/vim-reason-plus'
+  " Plug 'reasonml-editor/vim-reason-plus'
 
   " Dart
-  Plug 'dart-lang/dart-vim-plugin'
+  " Plug 'dart-lang/dart-vim-plugin'
 
   " Crystal
   Plug 'rhysd/vim-crystal'
