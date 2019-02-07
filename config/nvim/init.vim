@@ -45,8 +45,8 @@ set nowrap
 set splitbelow splitright                           " Open new split panes to right and bottom, which feels more natural
 
 " colors
-set background=light
-colorscheme solarized
+set background=dark
+colorscheme hybrid_material
 
 " providers
 let g:python_host_prog = '/usr/local/bin/python2'
