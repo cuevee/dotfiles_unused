@@ -201,19 +201,24 @@ let g:user_emmet_settings = {
     \  },
   \}
 
-" elm-vim
-let g:elm_jump_to_error = 0
-let g:elm_make_output_file = "elm.js"
-let g:elm_make_show_warnings = 0
-let g:elm_syntastic_show_warnings = 0
-let g:elm_browser_command = ""
-let g:elm_detailed_complete = 1
-let g:elm_format_autosave = 1
-let g:elm_format_fail_silently = 0
-let g:elm_setup_keybindings = 1
+" " elm-vim
+" let g:elm_jump_to_error = 0
+" let g:elm_make_output_file = "elm.js"
+" let g:elm_make_show_warnings = 0
+" let g:elm_syntastic_show_warnings = 0
+" let g:elm_browser_command = ""
+" let g:elm_detailed_complete = 1
+" let g:elm_format_autosave = 1
+" let g:elm_format_fail_silently = 0
+" let g:elm_setup_keybindings = 1
 
 " crystal
 let g:crystal_auto_format = 1
+
+" dart
+let dart_format_on_save = 1
+let dart_style_guide = 2
+let dart_html_in_string=v:true
 
 " ale
 let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
@@ -234,7 +239,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   Plug 'honza/vim-snippets'
 
   Plug 'airblade/vim-gitgutter'
-  Plug 'elmcast/elm-vim'
+  " Plug 'elmcast/elm-vim'
 
   " Completion
   if has('nvim')
@@ -262,7 +267,7 @@ call plug#begin('~/.local/share/nvim/plugged')
   " Plug 'reasonml-editor/vim-reason-plus'
 
   " Dart
-  " Plug 'dart-lang/dart-vim-plugin'
+  Plug 'dart-lang/dart-vim-plugin'
 
   " Crystal
   Plug 'rhysd/vim-crystal'

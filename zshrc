@@ -165,7 +165,7 @@ export PIP_RESPECT_VIRTUALENV=true     # automatically use active virtualenv
 export VIRTUALENV_DISTRIBUTE=true
 
 # GoLang
-export GOPATH=$HOME/source/go
+export GOPATH=$HOME/src/go
 
 # Docker
 export DOCKER_DATA_DIR=$HOME/.docker-data
@@ -209,6 +209,9 @@ export PATH="/usr/local/anaconda3/bin:$PATH"
 
 # fzf
 export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
+
+# dart
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
