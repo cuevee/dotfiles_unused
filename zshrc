@@ -220,3 +220,6 @@ complete -o nospace -C /usr/local/bin/vault vault
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# thefuck
+eval $(thefuck --alias)
