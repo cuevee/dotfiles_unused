@@ -328,7 +328,7 @@ exe "hi! SpellCap"      .s:fg_blue        .s:bg_none        .s:fmt_undr
 exe "hi! SpellLocal"    .s:fg_aqua        .s:bg_none        .s:fmt_undr
 exe "hi! SpellBad"      .s:fg_red         .s:bg_none        .s:fmt_undr
 exe "hi! SpellRare"     .s:fg_purple      .s:bg_none        .s:fmt_undr
-exe "hi! StatusLine"    .s:fg_green       .s:bg_none        .s:fmt_none
+exe "hi! StatusLine"    .s:fg_red         .s:bg_none        .s:fmt_bold
 exe "hi! StatusLineNC"  .s:fg_comment     .s:bg_none        .s:fmt_none
 exe "hi! TabLineSel"    .s:fg_comment     .s:bg_window      .s:fmt_none
 exe "hi! TabLine"       .s:fg_selection   .s:bg_darkcolumn  .s:fmt_none

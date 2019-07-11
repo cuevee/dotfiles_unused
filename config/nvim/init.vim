@@ -45,6 +45,7 @@ set nowrap
 set splitbelow splitright                           " Open new split panes to right and bottom, which feels more natural
 
 " colors
+" set termguicolors
 set background=dark
 colorscheme hybrid_material
 
@@ -249,6 +250,12 @@ call plug#begin('~/.local/share/nvim/plugged')
     Plug 'roxma/nvim-yarp'
     Plug 'roxma/vim-hug-neovim-rpc'
   endif
+
+  " Languages
+  Plug 'sheerun/vim-polyglot'
+
+  " Go
+  Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
 
   " Ruby
   Plug 'vim-ruby/vim-ruby', {'type':'opt'}
