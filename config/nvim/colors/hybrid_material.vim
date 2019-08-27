@@ -86,7 +86,7 @@ let g:colors_name = "hybrid_material"
 
 let s:palette = {'gui' : {} , 'cterm' : {}}
 
-let s:gui_background = "#263238"
+let s:gui_background = "#000000"
 let s:gui_selection  = "#455A64"
 let s:gui_line       = "#212D32"
 let s:gui_comment    = "#707880"
@@ -345,7 +345,7 @@ hi LongLineWarning  guifg=NONE        guibg=#371F1C     gui=underline ctermfg=NO
 if !has('gui_running') && exists("g:hybrid_custom_term_colors") && g:hybrid_custom_term_colors == 1
   let s:bg_normal = s:bg_none
 else
-  let s:bg_normal = s:bg_background
+  let s:bg_normal = s:bg_none
 endif
 exe "hi! Normal"        .s:fg_foreground  .s:bg_normal      .s:fmt_none
 
