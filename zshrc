@@ -22,7 +22,7 @@ function check_last_exit_code() {
 }
 
 firebase_prompt() {
-  local project=$(grep \"$(pwd)\" ~/.config/configstore/firebase-tools.json | cut -d" " -f2 | tr -d '"')
+  local project=$(grep \"$(pwd)\" ~/.config/configstore/firebase-tools.json | cut -d" " -f2 | tr -d '"' | tr -d ',')
   if [[ -n $project ]]; then
     echo " [$project]"
   fi
@@ -98,7 +98,7 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 setopt promptsubst
-PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}%{$fg[cyan]%}$(firebase_prompt)%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(direnv_info)$(jobs_prompt_info) %# '
+PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}%{$fg[magenta]%}$(firebase_prompt)%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(direnv_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
 # load our own completion functions
