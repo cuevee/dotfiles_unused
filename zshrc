@@ -22,7 +22,9 @@ function check_last_exit_code() {
 }
 
 firebase_prompt() {
-  local project=$(grep \"$(pwd)\" ~/.config/configstore/firebase-tools.json | cut -d" " -f2 | tr -d '"' | tr -d ',')
+  if [[ -f ~/.config/configstore/firebase-tools.json ]]; then
+	  local project=$(grep \"$(pwd)\" ~/.config/configstore/firebase-tools.json | cut -d" " -f2 | tr -d '"' | tr -d ',')
+  fi
   if [[ -n $project ]]; then
     echo " [$project]"
   fi
