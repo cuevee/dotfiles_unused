@@ -100,19 +100,19 @@ zle -N edit-command-line
 bindkey '^x^e' edit-command-line
 
 setopt promptsubst
-PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}%{$fg[magenta]%}$(firebase_prompt)%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(direnv_info)$(jobs_prompt_info) %# '
+PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}%{$fg[white]%}$(firebase_prompt)%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(direnv_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
-# load our own completion functions
-fpath=(~/.zsh/completion $fpath)
-fpath=(/usr/local/share/zsh-completions $fpath)
-fpath=(/usr/local/share/zsh/site-functions $fpath)
+if type brew &>/dev/null; then
+  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
+fi
 
 # completion
 setopt no_case_glob
-autoload -Uz compinit && compinit -i
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
       'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+
+autoload -Uz compinit && compinit -i
 
 # load custom executable functions
 for function in ~/.zsh/functions/*; do
@@ -214,7 +214,7 @@ export PATH="/usr/local/anaconda3/bin:$PATH"
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
 
 # autojump
-[[ -s $(brew --prefix)/etc/profile.d/autojump.sh ]] && . $(brew --prefix)/etc/profile.d/autojump.sh
+[ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
 # fzf
 export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
@@ -229,6 +229,3 @@ complete -o nospace -C /usr/local/bin/vault vault
 
 # direnv
 eval "$(direnv hook zsh)"
-
-# thefuck
-eval $(thefuck --alias)
