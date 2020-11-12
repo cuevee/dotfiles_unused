@@ -1,5 +1,28 @@
-filetype plugin indent on
+" Specify a directory for plugins
+call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'ryanoasis/vim-devicons'
+Plug 'airblade/vim-gitgutter'
+"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+
+Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+
+Plug 'vim-scripts/tComment'
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'kristijanhusak/vim-hybrid-material'
+Plug 'nelstrom/vim-markdown-folding'
+Plug 'dart-lang/dart-vim-plugin' " Dart Syntax
+Plug 'natebosch/vim-lsc'
+Plug 'natebosch/vim-lsc-dart'
+Plug 'vimwiki/vimwiki'
+
+" Initialize plugin system
+call plug#end()
+
+" ===== SET =====
+filetype plugin indent on
 set nocompatible                                    " Be iMproved
 set breakindent                                     " wrap lines without changing the amount of indent
 set backspace=2                                     " Backspace deletes like most programs in insert mode
@@ -23,8 +46,9 @@ set hidden
 set wildmenu
 set wildmode=list:longest,list:full
 set visualbell
-" set cursorline
-set mouse=a
+set cursorline
+
+" set mouse=a
 set number
 set ignorecase                                      " make searches case-sensitive only if they contain upper-case characters
 set smartcase
@@ -32,7 +56,7 @@ set gdefault                                        " gdefault applies substitut
 set showmatch
 set hlsearch
 set modelines=5
-set pastetoggle=<F2>
+" set pastetoggle=<F2>
 set listchars=tab:▸\·,trail:·,eol:¬
 set showbreak=…
 set tabstop=8                                       " make literal tabs clearly visible
@@ -44,99 +68,84 @@ set nojoinspaces                                    " Insert only one space when
 set nowrap
 set splitbelow splitright                           " Open new split panes to right and bottom, which feels more natural
 
-" colors
-" set termguicolors
-set background=dark
-colorscheme hybrid_material
+set shortmess+=F " don't give |ins-completion-menu| messages.
+set signcolumn=no " TODO @cuevee check this out as it could affect git gutter
+set updatetime=300 " TODO @cuevee check this out
+" ===== /SET =====
 
-" providers
-let g:python_host_prog = '/usr/local/bin/python2'
-let g:python3_host_prog = '/usr/local/anaconda3/bin/python3'
-
-" folding
+" ===== FOLDING =====
 set foldlevelstart=0
 set foldcolumn=2
 nnoremap <Space> za
 vnoremap <Space> za
+" ===== /FOLDING =====
 
-" statusline
+" ===== STATUSLINE =====
 set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
 set statusline+=%#warningmsg#
-" set statusline+=%{SyntasticStatuslineFlag()}
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 set statusline+=%*
 set fillchars=stl:-,stlnc:-,vert:│,fold:·,diff:-
+" ===== /STATUSLINE =====
 
+" ===== LEADER AND MAPS =====
 let mapleader = ','
-
-nnoremap / /\v
-vnoremap / /\v
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
-
-" Can't be bothered to understand ESC vs <c-c> in insert mode
-imap <c-c> <esc>
 nnoremap <leader><leader> <c-^>
-
-" Quicker line movement
-nnoremap <C-j> :m .+1<CR>==
-nnoremap <C-k> :m .-2<CR>==
-" inoremap <C-j> <Esc>:m .+1<CR>==gi
-" inoremap <C-k> <Esc>:m .-2<CR>==gi
-vnoremap <C-j> :m '>+1<CR>gv=gv
-vnoremap <C-k> :m '<-2<CR>gv=gv
-
-" Quicker tab movement
-nnoremap <C-l> :tabnext<CR>
-nnoremap <C-h> :tabprev<CR>
-
 nnoremap <leader>q gqip                                     " hard rewrap parahraph
 nnoremap <leader>v V`]                                      " reselect the text that was just pasted
-
-nmap <F2> ^y$:<C-R>"<CR>
-map <F5> :set nowrap!<CR>
-map <F6> :set spell!<CR>
+" nmap <F2> ^y$:<C-R>"<CR>                                    " paste toggle
+map <F5> :set nowrap!<CR>                                   " quick wrap toggle
+map <F6> :set spell!<CR>                                    " quick spell check toggle
 
 nmap <Leader>p :call <SID>SynStack()<CR>
 map <leader>n :call RenameFile()<cr>
-
-nmap <silent> <leader>t :TestNearest<CR>
-nmap <silent> <leader>T :TestFile<CR>
-nmap <silent> <leader>a :TestSuite<CR>
-nmap <silent> <leader>l :TestLast<CR>
-nmap <silent> <leader>g :TestVisit<CR>
 
 if has('nvim')
   tnoremap <Esc> <C-\><C-n>
 endif
 
-" fugitive
-map <leader>d :Gdiff<cr>
+map <leader>d :Gdiff<cr>                                    " fugitive map
+" ===== /LEADER AND MAPS =====
 
+" ===== AUTOCMDS =====
 augroup vimrcEx
   " Clear all autocmds in the group
   autocmd!
+
   " Jump to last cursor position unless it's invalid or in an event handler
   autocmd BufReadPost *
     \ if line("'\"") > 0 && line("'\"") <= line("$") |
     \   exe "normal g`\"" |
     \ endif
 
-  autocmd FileType ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  autocmd FileType python set sw=4 sts=4 et
+  " autocmd filetype ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
+  " autocmd filetype python set sw=4 sts=4 et
 
-  autocmd BufRead *.md set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  " autocmd bufread *.md set ai formatoptions=tcroqn2 comments=n:&gt;
+  " autocmd bufread,bufnewfile *.md setlocal textwidth=80
 
-  autocmd FileType markdown setlocal spell " Enable spellchecking for Markdow
-  autocmd! FileType mkd setlocal syn=off   " Don't syntax highlight markdown because it's often wrong
+  autocmd bufread,bufnewfile *.dart setlocal textwidth=120
+
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType javascript,typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+
+  autocmd filetype markdown setlocal spell " enable spellchecking for markdow
+  autocmd! filetype mkd setlocal syn=off   " don't syntax highlight markdown because it's often wrong
 
   " Leave the return key alone when in command line windows, since it's used
   " to run commands there.
   autocmd! CmdwinEnter * :unmap <cr>
   autocmd! CmdwinLeave * :call MapCR()
+
+  " autocmd BufWritePre * :%s/\s\+$//e " TODO @cuevee check this out
 augroup END
+" ===== /AUTOCMDS =====
 
-autocmd BufWritePre * :%s/\s\+$//e
-
+" ===== FUNCTIONS =====
 function! RenameFile()
     let old_name = expand('%')
     let new_name = input('New file name: ', expand('%'), 'file')
@@ -171,111 +180,165 @@ function! <SID>SynStack() " Show syntax highlighting groups for word under curso
   endif
   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
 endfunc
+" ===== /FUNCTIONS =====
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-" call deoplete#custom#option({
-"       \  'max_list': 100,
-"       \  'smart_case': v:true,
-"       \})
+" ===== QUICKER LINE MOVEMENT =====
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+" ===== /QUICKER LINE MOVEMENT =====
 
-" vim-go
-let g:go_fmt_command = "goimports"
-let g:go_auto_type_info = 1
+" ===== QUICKER TAB MOVEMENT =====
+nnoremap <C-l> :tabnext<CR>
+nnoremap <C-h> :tabprev<CR>
+" ===== /QUICKER TAB MOVEMENT =====
 
-" syntastic
-" let g:syntastic_html_tidy_ignore_errors=[" proprietary attribute \"ng-"]
-" let g:syntastic_always_populate_loc_list = 1
-" let g:syntastic_auto_loc_list = 0
-" let g:syntastic_check_on_open = 1
-" let g:syntastic_check_on_wq = 1
+" ===== THEME AND COLORS =====
+" set termguicolors
+" let g:hybrid_custom_term_colors = 1
+syntax enable
+set background=dark
+colorscheme hybrid_material
+" ===== /THEME AND COLORS =====
 
-" ultisnips
-let g:UltiSnipsExpandTrigger = '<c-j>'
-let g:UltiSnipsJumpForwardTrigger = '<c-j>'
-let g:UltiSnipsJumpBackwardTrigger = '<c-k>'
+" vim-prettier
+"let g:prettier#quickfix_enabled = 0
+"let g:prettier#quickfix_auto_focus = 0
+" prettier command for coc
+command! -nargs=0 Prettier :CocCommand prettier.formatFile
+" run prettier on save
+"let g:prettier#autoformat = 0
+"autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-" emmet
-let g:user_emmet_settings = {
-  \  'javascript.jsx' : {
-    \      'extends' : 'jsx',
-    \  },
-  \}
 
-" " elm-vim
-" let g:elm_jump_to_error = 0
-" let g:elm_make_output_file = "elm.js"
-" let g:elm_make_show_warnings = 0
-" let g:elm_syntastic_show_warnings = 0
-" let g:elm_browser_command = ""
-" let g:elm_detailed_complete = 1
-" let g:elm_format_autosave = 1
-" let g:elm_format_fail_silently = 0
-" let g:elm_setup_keybindings = 1
+" j/k will move virtual lines (lines that wrap)
+" TODO: @cuevee check this out
+" noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
+" noremap <silent> <expr> k (v:count == 0 ? 'gk' : 'k')
 
-" crystal
-let g:crystal_auto_format = 1
-
-" dart
+" ===== PLUGIN: dart-vim-plugin =====
 let dart_format_on_save = 1
 let dart_style_guide = 2
 let dart_html_in_string=v:true
+" ===== /PLUGIN: dart-vim-plugin =====
 
-" ale
-let b:ale_fixers = {'javascript': ['prettier', 'eslint']}
-let g:ale_completion_enabled = 1
-let g:ale_fix_on_save = 1
+" ===== PLUGIN: vimwiki =====
+let g:vimwiki_list = [{'path': '~/.vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1, 'links_space_char': '-',}]
 
-call plug#begin('~/.local/share/nvim/plugged')
-  Plug 'tpope/vim-unimpaired'
-  Plug 'tpope/vim-surround'
-  Plug 'tpope/vim-endwise'
-  Plug 'fatih/vim-go'
-  Plug 'vim-scripts/tComment'
-  Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
-  Plug 'kristijanhusak/vim-hybrid-material'
+" ===== /PLUGIN: vimwiki =====
 
-  Plug 'w0rp/ale'
-  Plug 'SirVer/ultisnips'
-  Plug 'honza/vim-snippets'
 
-  Plug 'airblade/vim-gitgutter'
-  " Plug 'elmcast/elm-vim'
+" ===== PLUGIN: coc.nvim =====
+let g:coc_global_extensions = [
+  \ 'coc-snippets',
+  \ 'coc-pairs',
+  \ 'coc-tsserver',
+  \ 'coc-eslint',
+  \ 'coc-prettier',
+  \ 'coc-json',
+  \ 'coc-fzf-preview',
+  \ ]
 
-  " Completion
-  if has('nvim')
-    Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+inoremap <silent><expr> <c-space> coc#refresh() " Use <c-space> to trigger completion.
+
+" Use <cr> to confirm completion, `<C-g>u` means break undo chain at current position.
+" Coc only does snippet and additional edit on confirm.
+inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+" Or use `complete_info` if your vim support it, like:
+" inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+" ===== /PLUGIN: coc.nvim =====
+
+" ===== MORE MAPS ===== TODO @cuevee move these
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
   else
-    Plug 'Shougo/deoplete.nvim'
-    Plug 'roxma/nvim-yarp'
-    Plug 'roxma/vim-hug-neovim-rpc'
+    call CocAction('doHover')
   endif
+endfunction
 
-  " Languages
-  Plug 'sheerun/vim-polyglot'
+" Highlight symbol under cursor on CursorHold TODO @cuevee find a place for this
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  " Go
-  Plug 'deoplete-plugins/deoplete-go', { 'do': 'make'}
+" Remap for rename current word
+nmap <F2> <Plug>(coc-rename)
 
-  " Ruby
-  Plug 'vim-ruby/vim-ruby', {'type':'opt'}
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
-  " Markdown
-  Plug 'nelstrom/vim-markdown-folding'
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-  " HTML / JS / React
-  Plug 'pangloss/vim-javascript'
-  Plug 'mattn/emmet-vim'
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-  " Elixir
-  Plug 'elixir-editors/vim-elixir'
+" Create mappings for function text object, requires document symbols feature of languageserver. TODO @cuevee check this out
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 
-  " Reason ML
-  " Plug 'reasonml-editor/vim-reason-plus'
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+" nmap <silent> <C-d> <Plug>(coc-range-select)
+" xmap <silent> <C-d> <Plug>(coc-range-select)
 
-  " Dart
-  Plug 'dart-lang/dart-vim-plugin'
+" ===== /MORE MAPS ===== TODO @cuevee move these
 
-  " Crystal
-  Plug 'rhysd/vim-crystal'
-call plug#end()
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" FIXME: @cuevee re-enable Coc with spaceless trigger leader
+" " Using CocList
+" " Show all diagnostics
+" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" " Manage extensions
+" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" " Show commands
+" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" " Find symbol of current document
+" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" " Search workspace symbols
+" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" " Do default action for next item.
+" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" " Do default action for previous item.
+" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" " Resume latest coc list
+" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
