@@ -31,6 +31,7 @@
   ci = commit -v
   co = checkout
   ss = submodule status
+  l = "!. ~/.githelpers && pretty_git_log"
 
   create-branch = !sh -c 'git push origin HEAD:refs/heads/$1 && git fetch origin && git branch --track $1 origin/$1 && cd . && git checkout $1' -
   delete-branch = !sh -c 'git push origin :refs/heads/$1 && git branch -D $1' -
@@ -53,17 +54,22 @@
 [core]
   excludesfile = ~/.gitignore
   autocrlf = input
+  # diff-so-fancy
+  # pager = diff-so-fancy | less --tabs=4 -RFX
+# diff-so-fancy
+# [pager]
+#   diff = diff-so-fancy | less --tabs=4 -RFXS --pattern '^(Date|added|deleted|modified): '
 [merge]
   ff = only
   tool = opendiff
 [include]
   path = .gitconfig.local
-[commit]
-  template = ~/.gitmessage
+# [commit]
+#   template = ~/.gitmessage
 [fetch]
   prune = true
-[rerere]
-  enabled = true
+# [rerere]
+#   enabled = true
 [diff]
   tool=opendiff
 	submodule = log
@@ -79,7 +85,21 @@
 [http]
   postBuffer = 157286400
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
+# diff-so-fancy
+[color "diff-highlight"]
+  oldNormal = red bold
+  oldHighlight = red bold 52
+  newNormal = green bold
+  newHighlight = green bold 22
+# diff-so-fancy
+[color "diff"]
+  meta = 11
+  frag = magenta bold
+  commit = yellow bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
