@@ -103,16 +103,13 @@ setopt promptsubst
 PS1='%{$reset_color%}%{$fg[blue]%}%2c%{$reset_color%}%{$fg[white]%}$(firebase_prompt)%{$reset_color%}$(git_prompt_info)$(git_stash_info)$(direnv_info)$(jobs_prompt_info) %# '
 RPROMPT='$(check_last_exit_code)'
 
-if type brew &>/dev/null; then
-  FPATH=$(brew --prefix)/share/zsh/site-functions:$FPATH
-fi
-
 # completion
 setopt no_case_glob
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' \
-      'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+  'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
 
-autoload -Uz compinit && compinit -i
+autoload -Uz compinit
+rm -f ~/.zcompdump; compinit
 
 # load custom executable functions
 for function in ~/.zsh/functions/*; do
@@ -176,9 +173,6 @@ export VIRTUALENV_DISTRIBUTE=true
 # GoLang
 export GOPATH=$HOME/src/go
 
-# Docker
-export DOCKER_DATA_DIR=$HOME/.docker-data
-
 # look for ey config in project dirs
 export EYRC=./.eyrc
 
@@ -194,17 +188,17 @@ export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
 
-# load pyenv if available
-# export PYENV_ROOT="$HOME/.pyenv"
-# if which pyenv &>/dev/null; then eval "$(pyenv init -)"; fi
-
 # load nodenv if available
-# if which nodenv &>/dev/null; then eval "$(nodenv init - zsh)"; fi
 if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 export PATH="$HOME/.nodenv/shims:$PATH"
 
 # anacondas
 export PATH="/usr/local/anaconda3/bin:$PATH"
+
+# pyenv
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+if which pyenv &>/dev/null; then eval "$(pyenv init -)"; fi
 
 # aliases
 [[ -f ~/.aliases ]] && source ~/.aliases
@@ -223,9 +217,6 @@ export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-autoload -U +X bashcompinit && bashcompinit
-complete -o nospace -C /usr/local/bin/vault vault
 
 # direnv
 eval "$(direnv hook zsh)"
