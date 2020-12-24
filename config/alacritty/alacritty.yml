@@ -593,6 +593,8 @@ mouse:
 # in the order they were defined in.
 
 # ------------------------------- BINDINGS ----------------------------------
+# https://posts.michaelks.org/simulating-macos-terminal-bindings-in-alacritty
+#
 # $ xxd -psd
 # ^Ac
 # 01630a
