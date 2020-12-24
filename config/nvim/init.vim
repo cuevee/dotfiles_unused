@@ -3,11 +3,13 @@ call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-Plug 'ryanoasis/vim-devicons'
+" Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
-"Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
-Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+" Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
+
+Plug 'tpope/vim-surround'
 
 Plug 'vim-scripts/tComment'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -16,7 +18,11 @@ Plug 'nelstrom/vim-markdown-folding'
 Plug 'dart-lang/dart-vim-plugin' " Dart Syntax
 Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
-Plug 'vimwiki/vimwiki'
+
+Plug 'vim-crystal/vim-crystal'
+Plug 'yuratomo/w3m.vim'
+
+Plug 'ap/vim-css-color'
 
 " Initialize plugin system
 call plug#end()
@@ -71,6 +77,8 @@ set splitbelow splitright                           " Open new split panes to ri
 set shortmess+=F " don't give |ins-completion-menu| messages.
 set signcolumn=no " TODO @cuevee check this out as it could affect git gutter
 set updatetime=300 " TODO @cuevee check this out
+
+set spellfile=~/.config/nvim/spell/en.utf-8.add
 " ===== /SET =====
 
 " ===== FOLDING =====
@@ -95,7 +103,7 @@ nnoremap <leader>ev :tabedit $MYVIMRC<cr>
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>q gqip                                     " hard rewrap parahraph
 nnoremap <leader>v V`]                                      " reselect the text that was just pasted
-" nmap <F2> ^y$:<C-R>"<CR>                                    " paste toggle
+nmap <F2> ^y$:<C-R>"<CR>                                    " paste toggle
 map <F5> :set nowrap!<CR>                                   " quick wrap toggle
 map <F6> :set spell!<CR>                                    " quick spell check toggle
 
@@ -121,15 +129,19 @@ augroup vimrcEx
     \ endif
 
   " autocmd filetype ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
-  " autocmd filetype python set sw=4 sts=4 et
 
   " autocmd bufread *.md set ai formatoptions=tcroqn2 comments=n:&gt;
   " autocmd bufread,bufnewfile *.md setlocal textwidth=80
+  autocmd filetype python set sw=4 sts=4 et
 
+  autocmd bufread,bufnewfile *.py setlocal textwidth=80
   autocmd bufread,bufnewfile *.dart setlocal textwidth=120
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
   " Setup formatexpr specified filetype(s).
   autocmd FileType javascript,typescript,json setl formatexpr=CocAction('formatSelected')
+  autocmd FileType python setl formatexpr=CocAction('formatSelected')
+
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
@@ -223,35 +235,40 @@ let dart_style_guide = 2
 let dart_html_in_string=v:true
 " ===== /PLUGIN: dart-vim-plugin =====
 
-" ===== PLUGIN: vimwiki =====
-let g:vimwiki_list = [{'path': '~/.vimwiki', 'syntax': 'markdown', 'ext': '.md', 'auto_toc': 1, 'links_space_char': '-',}]
-
-" ===== /PLUGIN: vimwiki =====
-
-
 " ===== PLUGIN: coc.nvim =====
+" \ 'coc-eslint',
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
-  \ 'coc-eslint',
   \ 'coc-prettier',
   \ 'coc-json',
-  \ 'coc-fzf-preview',
+  \ 'coc-toml',
+  \ 'coc-fzf-preview'
   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+
 inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+  \ pumvisible() ? coc#_select_confirm() :
+  \ coc#expandableOrJumpable() ?
+  \ "\<C-r>=coc#rpc#request('doKeymap', ['snippets-expand-jump',''])\<CR>" :
+  \ <SID>check_back_space() ? "\<TAB>" :
+  \ coc#refresh()
+
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:coc_snippet_next = '<tab>'
 
 inoremap <silent><expr> <c-space> coc#refresh() " Use <c-space> to trigger completion.
 
@@ -288,7 +305,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-nmap <F2> <Plug>(coc-rename)
+" nmap <F2> <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
@@ -300,6 +317,7 @@ nmap <leader>a  <Plug>(coc-codeaction-selected)
 
 " Remap for do codeAction of current line
 nmap <leader>ac  <Plug>(coc-codeaction)
+xmap <leader>ac  <Plug>(coc-codeaction)
 " Fix autofix problem of current line
 nmap <leader>qf  <Plug>(coc-fix-current)
 
@@ -322,7 +340,7 @@ command! -nargs=0 Format :call CocAction('format')
 " command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " use `:OR` for organize import of current buffer
-" command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
 " FIXME: @cuevee re-enable Coc with spaceless trigger leader
 " " Using CocList
