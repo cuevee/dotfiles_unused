@@ -37,7 +37,7 @@ jobs_prompt_info() {
 }
 
 direnv_info() {
-        [ "$DIRENV_DIR" != "" ] && echo " %{$fg[magenta]%}⦿%{$reset_color%}"
+        [ "$DIRENV_DIR" != "" ] && echo " %{$fg[yellow]%}❬❭%{$reset_color%}"
 }
 
 git_prompt_info() {
@@ -50,7 +50,7 @@ git_prompt_info() {
 git_stash_info() {
   # if [[ -f "${stash_file}" ]]; then
   if [[ -d .git && -f "$( git rev-parse --git-dir )/logs/refs/stash" ]]; then
-    echo "%{$fg[green]%} ⚑%{$reset_color%}"
+    echo " %{$fg[magenta]%}∴%{$reset_color%}"
   fi
 }
 
@@ -220,3 +220,6 @@ export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # direnv
 eval "$(direnv hook zsh)"
+
+# 1password
+# eval $(op signin my)
