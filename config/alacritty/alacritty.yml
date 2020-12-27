@@ -310,6 +310,17 @@ colors:
     cyan:    '#48b9d8'
     white:   '#c5c8c6'
 
+  # Dim colors
+  dim:
+    black:   '#131415'
+    red:     '#864343'
+    green:   '#777c44'
+    yellow:  '#9e824c'
+    blue:    '#556a7d'
+    magenta: '#75617b'
+    cyan:    '#5b7d78'
+    white:   '#828482'
+
 
 # Background opacity
 #
@@ -363,7 +374,7 @@ shell:
    - --login
 
 # Send ESC (\x1b) before characters when alt is pressed.
-#alt_send_esc: true
+# alt_send_esc: true
 
 mouse:
   hide_when_typing: true
@@ -629,6 +640,9 @@ key_bindings:
   - { key: J,          mods: Command|Alt,    chars:  "\x01\x6a"             } # send Ctrl-a, j
   - { key: K,          mods: Command|Alt,    chars:  "\x01\x6b"             } # send Ctrl-a, k
   - { key: L,          mods: Command|Alt,    chars:  "\x01\x6c"             } # send Ctrl-a, l
+
+  # Plugin keys
+  - { key: U,          mods: Alt,         chars:  "\x1Bu"                   } # send Alt-u
 
   #- { key: Paste,                                action: Paste          }
   #- { key: Copy,                                 action: Copy           }
