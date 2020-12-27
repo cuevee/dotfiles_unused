@@ -133,9 +133,9 @@ else
   let s:cterm_selection  = "237"
   let s:cterm_line       = "235"
   let s:cterm_comment    = "243"
-  let s:cterm_red        = "167"
+  let s:cterm_red        = "131"
   let s:cterm_orange     = "173"
-  let s:cterm_yellow     = "221"
+  let s:cterm_yellow     = "222"
   let s:cterm_green      = "143"
   let s:cterm_aqua       = "109"
   let s:cterm_blue       = "110"
@@ -328,7 +328,7 @@ exe "hi! SpellCap"      .s:fg_blue        .s:bg_none        .s:fmt_undr
 exe "hi! SpellLocal"    .s:fg_aqua        .s:bg_none        .s:fmt_undr
 exe "hi! SpellBad"      .s:fg_red         .s:bg_none        .s:fmt_undr
 exe "hi! SpellRare"     .s:fg_purple      .s:bg_none        .s:fmt_undr
-exe "hi! StatusLine"    .s:fg_red         .s:bg_none        .s:fmt_bold
+exe "hi! StatusLine"    .s:fg_red         .s:bg_none        .s:fmt_none
 exe "hi! StatusLineNC"  .s:fg_comment     .s:bg_none        .s:fmt_none
 exe "hi! TabLineSel"    .s:fg_comment     .s:bg_window      .s:fmt_none
 exe "hi! TabLine"       .s:fg_selection   .s:bg_darkcolumn  .s:fmt_none
