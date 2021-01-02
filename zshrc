@@ -194,6 +194,7 @@ export PATH="$HOME/.nodenv/shims:$PATH"
 
 # anacondas
 export PATH="/usr/local/anaconda3/bin:$PATH"
+export PATH="/usr/local/anaconda2/bin:$PATH"
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -210,8 +211,9 @@ if which pyenv &>/dev/null; then eval "$(pyenv init -)"; fi
 # autojump
 [ -f /usr/local/etc/profile.d/autojump.sh ] && . /usr/local/etc/profile.d/autojump.sh
 
+# Disabled because fzf is now installed via homebrew
 # fzf
-export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
+# export PATH=$PATH:$HOME/.vim/plugged/fzf/bin
 
 # dart
 export PATH="$PATH":"$HOME/.pub-cache/bin"
