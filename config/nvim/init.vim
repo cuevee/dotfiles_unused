@@ -2,7 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 " Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -12,7 +12,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 Plug 'tpope/vim-surround'
 
 Plug 'vim-scripts/tComment'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'dart-lang/dart-vim-plugin' " Dart Syntax
@@ -20,7 +20,6 @@ Plug 'natebosch/vim-lsc'
 Plug 'natebosch/vim-lsc-dart'
 
 Plug 'vim-crystal/vim-crystal'
-Plug 'yuratomo/w3m.vim'
 
 Plug 'ap/vim-css-color'
 
@@ -79,6 +78,8 @@ set signcolumn=no " TODO @cuevee check this out as it could affect git gutter
 set updatetime=300 " TODO @cuevee check this out
 
 set spellfile=~/.config/nvim/spell/en.utf-8.add
+
+set rtp+=/usr/local/opt/fzf
 " ===== /SET =====
 
 " ===== FOLDING =====
@@ -237,6 +238,7 @@ let dart_html_in_string=v:true
 
 " ===== PLUGIN: coc.nvim =====
 " \ 'coc-eslint',
+" \ 'coc-fzf-preview'
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
@@ -244,7 +246,6 @@ let g:coc_global_extensions = [
   \ 'coc-prettier',
   \ 'coc-json',
   \ 'coc-toml',
-  \ 'coc-fzf-preview'
   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
