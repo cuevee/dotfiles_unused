@@ -193,12 +193,12 @@ if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
 export PATH="$HOME/.nodenv/shims:$PATH"
 
 # anacondas
-export PATH="/usr/local/anaconda3/bin:$PATH"
-export PATH="/usr/local/anaconda2/bin:$PATH"
+# export PATH="/usr/local/anaconda2/bin:$PATH"
+# export PATH="/usr/local/anaconda3/bin:$PATH"
 
 # pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
+# export PYENV_ROOT="$HOME/.pyenv"
+# export PATH="$PYENV_ROOT/bin:$PATH"
 if which pyenv &>/dev/null; then eval "$(pyenv init -)"; fi
 
 # aliases
