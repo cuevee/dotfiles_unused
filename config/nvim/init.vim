@@ -2,7 +2,7 @@
 call plug#begin('~/.local/share/nvim/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-" Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
+Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
 " Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
@@ -38,7 +38,7 @@ set noswapfile                                      " http://robots.thoughtbot.c
 set history=10000
 set showcmd                                         " display incomplete commands
 set incsearch                                       " do incremental searching
-set laststatus=2                                    " Always display the status line
+" set laststatus=2                                    " Always display the status line
 set autowrite                                       " Automatically :write before running commands
 set hls                                             " highlight and incremental search
 set clipboard=unnamed                               " use system clipboard
@@ -71,7 +71,7 @@ set expandtab
 set autoread                                        " If a file is changed outside of vim, automatically reload it without asking
 set nojoinspaces                                    " Insert only one space when joining lines that contain sentence-terminating punctuation like `.`.
 set nowrap
-set splitbelow splitright                           " Open new split panes to right and bottom, which feels more natural
+set splitright splitbelow                           " Open new split panes to right and bottom, which feels more natural
 
 set shortmess+=F " don't give |ins-completion-menu| messages.
 set signcolumn=no " TODO @cuevee check this out as it could affect git gutter
@@ -80,6 +80,25 @@ set updatetime=300 " TODO @cuevee check this out
 set spellfile=~/.config/nvim/spell/en.utf-8.add
 
 set rtp+=/usr/local/opt/fzf
+
+" Give more space for displaying messages.
+set cmdheight=2
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=300
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+
+" Always show the signcolumn, otherwise it would shift the text each time
+" diagnostics appear/become resolved.
+if has("patch-8.1.1564")
+  " Recently vim can merge signcolumn and number column into one
+  set signcolumn=number
+else
+  set signcolumn=yes
+endif
 " ===== /SET =====
 
 " ===== FOLDING =====
@@ -90,17 +109,19 @@ vnoremap <Space> za
 " ===== /FOLDING =====
 
 " ===== STATUSLINE =====
-set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-set statusline+=%#warningmsg#
+" set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+" set statusline+=%#warningmsg#
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-set statusline+=%*
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+" set statusline+=%*
 set fillchars=stl:-,stlnc:-,vert:│,fold:·,diff:-
 " ===== /STATUSLINE =====
 
 " ===== LEADER AND MAPS =====
 let mapleader = ','
 nnoremap <leader>ev :tabedit $MYVIMRC<cr>
+nnoremap <leader>et :tabedit $HOME/.tmux.conf<cr>
+nnoremap <leader>ea :tabedit $HOME/.config/alacritty/alacritty.yml<cr>
 nnoremap <leader><leader> <c-^>
 nnoremap <leader>q gqip                                     " hard rewrap parahraph
 nnoremap <leader>v V`]                                      " reselect the text that was just pasted
@@ -108,7 +129,7 @@ nmap <F2> ^y$:<C-R>"<CR>                                    " paste toggle
 map <F5> :set nowrap!<CR>                                   " quick wrap toggle
 map <F6> :set spell!<CR>                                    " quick spell check toggle
 
-nmap <Leader>p :call <SID>SynStack()<CR>
+" nmap <Leader>p :call <SID>SynStack()<CR>
 map <leader>n :call RenameFile()<cr>
 
 if has('nvim')
@@ -132,11 +153,11 @@ augroup vimrcEx
   " autocmd filetype ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
 
   " autocmd bufread *.md set ai formatoptions=tcroqn2 comments=n:&gt;
-  " autocmd bufread,bufnewfile *.md setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
   autocmd filetype python set sw=4 sts=4 et
 
-  autocmd bufread,bufnewfile *.py setlocal textwidth=80
-  autocmd bufread,bufnewfile *.dart setlocal textwidth=120
+  autocmd BufRead,BufNewFile *.py setlocal textwidth=80
+  " autocmd BufRead,BufNewFile *.dart setlocal textwidth=120
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
 
   " Setup formatexpr specified filetype(s).
@@ -146,7 +167,7 @@ augroup vimrcEx
   " Update signature help on jump placeholder
   autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
 
-  autocmd filetype markdown setlocal spell " enable spellchecking for markdow
+  " autocmd filetype markdown setlocal spell columns=78  " enable spellchecking for markdow
   autocmd! filetype mkd setlocal syn=off   " don't syntax highlight markdown because it's often wrong
 
   " Leave the return key alone when in command line windows, since it's used
@@ -156,6 +177,14 @@ augroup vimrcEx
 
   " autocmd BufWritePre * :%s/\s\+$//e " TODO @cuevee check this out
 augroup END
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 " ===== /AUTOCMDS =====
 
 " ===== FUNCTIONS =====
@@ -187,12 +216,12 @@ function! MapCR()
 endfunction
 call MapCR()
 
-function! <SID>SynStack() " Show syntax highlighting groups for word under cursor
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
+" function! <SID>SynStack() " Show syntax highlighting groups for word under cursor
+"   if !exists("*synstack")
+"     return
+"   endif
+"   echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+" endfunc
 " ===== /FUNCTIONS =====
 
 " ===== QUICKER LINE MOVEMENT =====
@@ -237,9 +266,77 @@ let dart_html_in_string=v:true
 " ===== /PLUGIN: dart-vim-plugin =====
 
 " ===== PLUGIN: coc.nvim =====
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap keys for applying codeAction to the current buffer.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Map function and class text objects
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+omap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap af <Plug>(coc-funcobj-a)
+xmap ic <Plug>(coc-classobj-i)
+omap ic <Plug>(coc-classobj-i)
+xmap ac <Plug>(coc-classobj-a)
+omap ac <Plug>(coc-classobj-a)
+
+" Remap <C-f> and <C-b> for scroll float windows/popups.
+if has('nvim-0.4.0') || has('patch-8.2.0750')
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+endif
+
+" Use CTRL-S for selections ranges.
+" Requires 'textDocument/selectionRange' support of language server.
+nmap <silent> <C-s> <Plug>(coc-range-select)
+xmap <silent> <C-s> <Plug>(coc-range-select)
+
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Mappings for CoCList
+" Show all diagnostics.
+nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
 " \ 'coc-eslint',
-" \ 'coc-fzf-preview'
 let g:coc_global_extensions = [
+  \ 'coc-fzf-preview',
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
@@ -268,6 +365,9 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+let g:python_host_prog='$HOME/.pyenv/shims/python2'
+let g:python3_host_prog='$HOME/.pyenv/shims/python3'
 
 let g:coc_snippet_next = '<tab>'
 
@@ -306,7 +406,7 @@ endfunction
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
-" nmap <F2> <Plug>(coc-rename)
+nmap <leader>rn <Plug>(coc-rename)
 
 " Remap for format selected region
 xmap <leader>f  <Plug>(coc-format-selected)
