@@ -10,6 +10,7 @@ Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 " Plug 'HerringtonDarkholme/yats.vim' " TS Syntax
 
 Plug 'tpope/vim-surround'
+Plug 'tpope/vim-fugitive'
 
 Plug 'vim-scripts/tComment'
 " Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -38,7 +39,7 @@ set noswapfile                                      " http://robots.thoughtbot.c
 set history=10000
 set showcmd                                         " display incomplete commands
 set incsearch                                       " do incremental searching
-" set laststatus=2                                    " Always display the status line
+set laststatus=2                                    " Always display the status line
 set autowrite                                       " Automatically :write before running commands
 set hls                                             " highlight and incremental search
 set clipboard=unnamed                               " use system clipboard
@@ -109,11 +110,12 @@ vnoremap <Space> za
 " ===== /FOLDING =====
 
 " ===== STATUSLINE =====
-" set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-" set statusline+=%#warningmsg#
+set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
+set statusline+=%#warningmsg#
 " Add status line support, for integration with other plugin, checkout `:h coc-status`
-" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 " set statusline+=%*
+set statusline+=%{coc#status()}%{get(b:,'coc_current_function','')}
+set statusline+=\ %{FugitiveStatusline()}
 set fillchars=stl:-,stlnc:-,vert:│,fold:·,diff:-
 " ===== /STATUSLINE =====
 
@@ -152,13 +154,12 @@ augroup vimrcEx
 
   " autocmd filetype ruby,haml,eruby,yaml,html,javascript,sass,cucumber set ai sw=2 sts=2 et
 
-  " autocmd bufread *.md set ai formatoptions=tcroqn2 comments=n:&gt;
-  autocmd BufRead,BufNewFile *.md setlocal textwidth=80
   autocmd filetype python set sw=4 sts=4 et
 
-  autocmd BufRead,BufNewFile *.py setlocal textwidth=80
-  " autocmd BufRead,BufNewFile *.dart setlocal textwidth=120
+  " autocmd bufread *.md set ai formatoptions=tcroqn2 comments=n:&gt;
   autocmd BufRead,BufNewFile *.md setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.py setlocal textwidth=80
+  autocmd BufRead,BufNewFile *.dart setlocal textwidth=120
 
   " Setup formatexpr specified filetype(s).
   autocmd FileType javascript,typescript,json setl formatexpr=CocAction('formatSelected')
@@ -311,11 +312,6 @@ command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
 " Mappings for CoCList
 " Show all diagnostics.
 nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
@@ -335,6 +331,7 @@ nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 " \ 'coc-eslint',
+" \ 'coc-toml',
 let g:coc_global_extensions = [
   \ 'coc-fzf-preview',
   \ 'coc-snippets',
@@ -342,7 +339,6 @@ let g:coc_global_extensions = [
   \ 'coc-tsserver',
   \ 'coc-prettier',
   \ 'coc-json',
-  \ 'coc-toml',
   \ ]
 
 " Use tab for trigger completion with characters ahead and navigate.
@@ -443,21 +439,3 @@ command! -nargs=0 Format :call CocAction('format')
 " use `:OR` for organize import of current buffer
 command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-" FIXME: @cuevee re-enable Coc with spaceless trigger leader
-" " Using CocList
-" " Show all diagnostics
-" nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
-" " Manage extensions
-" nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
-" " Show commands
-" nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
-" " Find symbol of current document
-" nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
-" " Search workspace symbols
-" nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
-" " Do default action for next item.
-" nnoremap <silent> <space>j  :<C-u>CocNext<CR>
-" " Do default action for previous item.
-" nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
-" " Resume latest coc list
-" nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
