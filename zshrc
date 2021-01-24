@@ -187,6 +187,7 @@ export MANPATH=$MANPATH:/usr/local/opt/erlang/lib/erlang/man
 
 # load rbenv if available
 if which rbenv &>/dev/null; then eval "$(rbenv init - zsh)"; fi
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 # load nodenv if available
 if which nodenv &>/dev/null; then eval "$(nodenv init -)"; fi
