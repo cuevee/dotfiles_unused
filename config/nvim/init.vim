@@ -1,9 +1,9 @@
 " Specify a directory for plugins
 call plug#begin('~/.local/share/nvim/plugged')
 
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'yuki-yano/fzf-preview.vim', { 'branch': 'release/remote', 'do': ':UpdateRemotePlugins' }
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'yuki-ycino/fzf-preview.vim', { 'branch': 'release', 'do': ':UpdateRemotePlugins' }
-" Plug 'ryanoasis/vim-devicons'
 Plug 'airblade/vim-gitgutter'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
@@ -13,7 +13,6 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-fugitive'
 
 Plug 'vim-scripts/tComment'
-" Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'kristijanhusak/vim-hybrid-material'
 Plug 'nelstrom/vim-markdown-folding'
 Plug 'dart-lang/dart-vim-plugin' " Dart Syntax
@@ -23,6 +22,10 @@ Plug 'natebosch/vim-lsc-dart'
 Plug 'vim-crystal/vim-crystal'
 
 Plug 'ap/vim-css-color'
+
+Plug 'vimwiki/vimwiki'
+
+Plug 'ryanoasis/vim-devicons'
 
 " Initialize plugin system
 call plug#end()
@@ -83,7 +86,7 @@ set spellfile=~/.config/nvim/spell/en.utf-8.add
 set rtp+=/usr/local/opt/fzf
 
 " Give more space for displaying messages.
-set cmdheight=2
+set cmdheight=1
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -100,6 +103,8 @@ if has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+let g:lsc_auto_map = v:true
 " ===== /SET =====
 
 " ===== FOLDING =====
@@ -131,7 +136,8 @@ nmap <F2> ^y$:<C-R>"<CR>                                    " paste toggle
 map <F5> :set nowrap!<CR>                                   " quick wrap toggle
 map <F6> :set spell!<CR>                                    " quick spell check toggle
 
-" nmap <Leader>p :call <SID>SynStack()<CR>
+nmap <C-p> :FZF<CR>
+nmap <Leader>p :FZF<CR>
 map <leader>n :call RenameFile()<cr>
 
 if has('nvim')
@@ -254,7 +260,6 @@ command! -nargs=0 Prettier :CocCommand prettier.formatFile
 "let g:prettier#autoformat = 0
 "autocmd BufWritePre *.js,*.jsx,*.mjs,*.ts,*.tsx,*.css,*.less,*.scss,*.json,*.graphql,*.md,*.vue,*.yaml,*.html PrettierAsync
 
-
 " j/k will move virtual lines (lines that wrap)
 " TODO: @cuevee check this out
 " noremap <silent> <expr> j (v:count == 0 ? 'gj' : 'j')
@@ -266,7 +271,33 @@ let dart_style_guide = 2
 let dart_html_in_string=v:true
 " ===== /PLUGIN: dart-vim-plugin =====
 
+" ===== PLUGIN: vimwiki-plugin =====
+let g:vimwiki_list = [
+  \ {'path': '~/Dropbox/vimwiki', 'syntax': 'markdown', 'ext': '.md'},
+  \ {'path': '~/src/mnemonic/perch.wiki', 'syntax': 'markdown', 'ext': '.md', 'index': 'Home'}
+  \ ]
+" ===== /PLUGIN: vimwiki-plugin =====
+
 " ===== PLUGIN: coc.nvim =====
+nmap <C-i> [fzf-p]
+xmap <C-i> [fzf-p]
+
+nnoremap <silent> [fzf-p]p     :<C-u>FzfPreviewFromResources project_mru git<CR>
+nnoremap <silent> [fzf-p]gs    :<C-u>FzfPreviewGitStatus<CR>
+nnoremap <silent> [fzf-p]ga    :<C-u>FzfPreviewGitActions<CR>
+nnoremap <silent> [fzf-p]b     :<C-u>FzfPreviewBuffers<CR>
+nnoremap <silent> [fzf-p]B     :<C-u>FzfPreviewAllBuffers<CR>
+nnoremap <silent> [fzf-p]o     :<C-u>FzfPreviewFromResources buffer project_mru<CR>
+nnoremap <silent> [fzf-p]<C-o> :<C-u>FzfPreviewJumps<CR>
+nnoremap <silent> [fzf-p]g;    :<C-u>FzfPreviewChanges<CR>
+nnoremap <silent> [fzf-p]/     :<C-u>FzfPreviewLines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'"<CR>
+nnoremap <silent> [fzf-p]*     :<C-u>FzfPreviewLines --add-fzf-arg=--no-sort --add-fzf-arg=--query="'<C-r>=expand('<cword>')<CR>"<CR>
+nnoremap          [fzf-p]gr    :<C-u>FzfPreviewProjectGrep<Space>
+xnoremap          [fzf-p]gr    "sy:FzfPreviewProjectGrep<Space>-F<Space>"<C-r>=substitute(substitute(@s, '\n', '', 'g'), '/', '\\/', 'g')<CR>"
+nnoremap <silent> [fzf-p]t     :<C-u>FzfPreviewBufferTags<CR>
+nnoremap <silent> [fzf-p]q     :<C-u>FzfPreviewQuickFix<CR>
+nnoremap <silent> [fzf-p]l     :<C-u>FzfPreviewLocationList<CR>
+
 " Applying codeAction to the selected region.
 " Example: `<leader>aap` for current paragraph
 xmap <leader>a  <Plug>(coc-codeaction-selected)
@@ -377,7 +408,7 @@ inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 " ===== /PLUGIN: coc.nvim =====
 
 " ===== MORE MAPS ===== TODO @cuevee move these
-" Use `[g` and `]g` to navigate diagnostics
+" Usa `[g` and `]g` to navigate diagnostics
 nmap <silent> [g <Plug>(coc-diagnostic-prev)
 nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
